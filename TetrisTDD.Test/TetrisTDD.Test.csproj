@@ -48,6 +48,9 @@
     <Compile Include="Step1\2WhenABlockIsDroppedTests.cs" />
     <Compile Include="Step1\3WhenABlockReachesTheBottom.cs" />
     <Compile Include="Step1\4WhenABlockLandsOnAnotherBlock.cs" />
+    <Compile Include="Step2\0RotatingPiecesOfBlocks.cs" />
+    <Compile Include="Step2\1Rotate3x3Piece.cs" />
+    <Compile Include="Step2\2Rotate5x5Piece.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

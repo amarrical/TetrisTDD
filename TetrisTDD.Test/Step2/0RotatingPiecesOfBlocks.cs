@@ -1,10 +1,10 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="_0FallingBlockTests.cs" company="ImprovingEnterprises">
+// <copyright file="_0RotatingPiecesOfBlocks.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
 // <author>Anthony Marrical</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD.Test.Step1
+namespace TetrisTDD.Test.Step2
 {
     using System.Diagnostics.CodeAnalysis;
 
@@ -14,18 +14,12 @@ namespace TetrisTDD.Test.Step1
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
     [SetUpFixture]
-    public class _0FallingBlockTests
+    public class _0RotatingPiecesOfBlocks
     {
         #region [ Fields ]
 
-        protected Board board;
+        // protected Piece piece;
 
         #endregion
-
-        [SetUp]
-        public void SetUp()
-        {
-            // this.board = new Board(3, 3);
-        }
     }
 }

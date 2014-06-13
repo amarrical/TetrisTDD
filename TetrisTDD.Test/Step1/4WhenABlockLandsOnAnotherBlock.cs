@@ -16,38 +16,36 @@ namespace TetrisTDD.Test.Step1
     [TestFixture]
     public class _4WhenABlockLandsOnAnotherBlock : _0FallingBlockTests
     {
-        //[SetUp]
-        //public void LandOnAnotherBlock()
-        //{
-        //    this.board.Drop('X');
-        //    board.Tick();
-        //    board.Tick();
-        //    board.Tick();
-        //    Assert.AreEqual("...\n...\n.X.\n", this.board.ToString());
-        //    Assert.IsFalse(board.HasFalling());
+        [SetUp]
+        public void LandOnAnotherBlock()
+        {
+            this.board.Drop('X');
+            board.Tick();
+            board.Tick();
+            board.Tick();
+            Assert.AreEqual("...\n...\n.X.\n", this.board.ToString());
+            Assert.IsFalse(board.HasFalling());
 
-        //    this.board.Drop('Y');
-        //    board.Tick();
-        //}
+            this.board.Drop('Y');
+            board.Tick();
+        }
 
         #region [ Tests ]
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void BoardStillHasFallingRightAboveOtherBlock()
-        //{
-        //    Assert.IsTrue(this.board.HasFalling());
-        //    Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
-        //}
+        [Test]
+        public void BoardStillHasFallingRightAboveOtherBlock()
+        {
+            Assert.IsTrue(this.board.HasFalling());
+            Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
+        }
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void BlockStopsWhenItHitsTheOtherBlock()
-        //{
-        //    this.board.Tick();
-        //    Assert.IsFalse(this.board.HasFalling());
-        //    Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
-        //}
+        [Test]
+        public void BlockStopsWhenItHitsTheOtherBlock()
+        {
+            this.board.Tick();
+            Assert.IsFalse(this.board.HasFalling());
+            Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
+        }
 
         #endregion
     }

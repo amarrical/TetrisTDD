@@ -25,7 +25,7 @@ namespace TetrisTDD.Test.Step1
         [SetUp]
         public void SetUp()
         {
-            // this.board = new Board(3, 3);
+            this.board = new Board(3, 3);
         }
     }
 }

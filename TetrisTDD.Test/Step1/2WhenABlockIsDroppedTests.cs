@@ -16,50 +16,48 @@ namespace TetrisTDD.Test.Step1
     [TestFixture]
     public class _2WhenABlockIsDroppedTests : _0FallingBlockTests
     {
-        //[SetUp]
-        //public void DropABlock()
-        //{
-        //    this.Board.Drop(new Block('X'));
-        //}
+        [SetUp]
+        public void DropABlock()
+        {
+            this.board.Drop(new Block('X'));
+        }
 
         #region [ Tests ]
 
-        //[Test]
-        //public void TheBlockIsFalling()
-        //{
-        //    Assert.IsTrue(this.board.HasFalling());
-        //}
+        [Test]
+        public void TheBlockIsFalling()
+        {
+            Assert.IsTrue(this.board.HasFalling());
+        }
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void ItStartsFromTopMiddle()
-        //{
-        //    Assert.AreEqual(".X.\n...\n...\n", board.ToString());
-        //}
+        [Test]
+        public void ItStartsFromTopMiddle()
+        {
+            Assert.AreEqual(".X.\n...\n...\n", board.ToString());
+        }
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void ItMovesDownOneRowPerTick()
-        //{
-        //    board.Tick();
-        //    Assert.AreEqual("...\n.X.\n...\n", this.board.ToString());
-        //}
+        [Test]
+        public void ItMovesDownOneRowPerTick()
+        {
+            board.Tick();
+            Assert.AreEqual("...\n.X.\n...\n", this.board.ToString());
+        }
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void AtMostOneBlockMayBeFallingAtATime()
-        //{
-        //    try
-        //    {
-        //        board.Drop(new Block('Y'));
-        //    }
-        //    catch (IllegalStateException e)
-        //    {
-        //        Assert.IsTrue(e.Message.Contains("already falling"));
-        //    }
 
-        //    Assert.AreEqual(".X.\n...\n...\n", board.ToString());
-        //}
+        [Test]
+        public void AtMostOneBlockMayBeFallingAtATime()
+        {
+            try
+            {
+                board.Drop(new Block('Y'));
+            }
+            catch (System.InvalidOperationException e)
+            {
+                Assert.IsTrue(e.Message.Contains("already falling"));
+            }
+
+            Assert.AreEqual(".X.\n...\n...\n", board.ToString());
+        }
 
         #endregion
     }

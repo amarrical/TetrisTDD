@@ -51,6 +51,10 @@
     <Compile Include="Step2\0RotatingPiecesOfBlocks.cs" />
     <Compile Include="Step2\1Rotate3x3Piece.cs" />
     <Compile Include="Step2\2Rotate5x5Piece.cs" />
+    <Compile Include="Step3\0RotatingTetrominoes.cs" />
+    <Compile Include="Step3\1TheTShape.cs" />
+    <Compile Include="Step3\2TheIShape.cs" />
+    <Compile Include="Step3\3TheOShape.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

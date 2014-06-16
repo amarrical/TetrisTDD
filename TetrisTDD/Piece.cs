@@ -100,6 +100,16 @@ namespace TetrisTDD
             return pieceString;
         }
 
+        /// <summary>
+        /// Returns a deep copy of this Piece
+        /// </summary>
+        /// <returns>A copy of this Piece</returns>
+        public Piece Clone()
+        {
+            string stringCopy = ToString();
+            return new Piece(stringCopy);
+        }
+
         #endregion
 
         #region [ Private Helpers ]

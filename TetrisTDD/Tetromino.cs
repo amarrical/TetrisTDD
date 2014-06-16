@@ -7,7 +7,7 @@
 namespace TetrisTDD
 {
     /// <summary>
-    /// Represents the type of shapes a Tetromino can represent
+    /// Represents the type of shapes a <c>Tetromino</c> can represent<c>Tetromino</c>
     /// </summary>
     public enum TetrominoShape 
                 { 
@@ -17,7 +17,7 @@ namespace TetrisTDD
                 }
 
     /// <summary>
-    /// Represents the current orientation of a Tetromino
+    /// Represents the current orientation of a <c>Tetromino</c>
     /// </summary>
     public enum Orientation 
                 {
@@ -35,42 +35,47 @@ namespace TetrisTDD
         #region [ Fields ]
 
         /// <summary>
-        /// The string representation of a T_SHAPE tetromino at its initial orientation
+        /// The string representation of a T_SHAPE <c>Tetromino</c> at its initial orientation
         /// </summary>
         private const string T_SHAPE_STRING_A = ".T.\nTTT\n...\n";
 
         /// <summary>
-        /// The string representation of a T_SHAPE tetromino at 90 degrees orientation
+        /// The string representation of a T_SHAPE <c>Tetromino</c> at 90 degrees orientation
         /// </summary>
         private const string T_SHAPE_STRING_B = ".T.\n.TT\n.T.\n";
 
         /// <summary>
-        /// The string representation of a T_SHAPE tetromino at 180 degrees orientation
+        /// The string representation of a T_SHAPE <c>Tetromino</c> at 180 degrees orientation
         /// </summary>
         private const string T_SHAPE_STRING_C = "...\nTTT\n.T.\n";
 
         /// <summary>
-        /// The string representation of a T_SHAPE tetromino at 270 degrees orientation
+        /// The string representation of a T_SHAPE <c>Tetromino</c> at 270 degrees orientation
         /// </summary>
         private const string T_SHAPE_STRING_D = ".T.\nTT.\n.T.\n";
 
         /// <summary>
-        /// The string representation of an I_SHAPE tetromino when horizontal
+        /// The string representation of an I_SHAPE <c>Tetromino</c> when horizontal
         /// </summary>
         private const string I_SHAPE_STRING_HORIZONTAL = ".....\n.....\nIIII.\n.....\n.....\n";
 
         /// <summary>
-        /// The string representation of an I_SHAPE tetromino when vertical
+        /// The string representation of an I_SHAPE <c>Tetromino</c> when vertical
         /// </summary>
         private const string I_SHAPE_STRING_VERTICAL = "..I..\n..I..\n..I..\n..I..\n.....\n";
 
         /// <summary>
-        /// The shape representation of this Tetromino
+        /// The string representation of an O_SHAPE <c>Tetromino</c>
+        /// </summary>
+        private const string O_SHAPE_STRING = ".OO\n.OO\n...\n";
+
+        /// <summary>
+        /// The shape representation of this <c>Tetromino</c>
         /// </summary>
         private TetrominoShape currentShape;
 
         /// <summary>
-        /// The current orientation of the Tetromino
+        /// The current orientation of the <c>Tetromino</c>
         /// </summary>
         private Orientation currentOrientation;
 
@@ -79,9 +84,9 @@ namespace TetrisTDD
         #region [ Constructors ]
 
         /// <summary>
-        /// Constructs a Tetromino given a shape from the TetrominoShape enum
+        /// Initializes a new instance of the <see cref="Tetromino"/> class
         /// </summary>
-        /// <param name="shape">A shape from the TetrominoShape enum</param>
+        /// <param name="shape">A shape from the <c>TetrominoShape</c> <c>enum</c></param>
         public Tetromino(TetrominoShape shape)
         {
             this.currentShape = shape;
@@ -89,10 +94,10 @@ namespace TetrisTDD
         }
 
         /// <summary>
-        /// Constructs a Tetromino given a shape from the TetrominoShape enum
+        /// Initializes a new instance of the <see cref="Tetromino"/> class
         /// </summary>
-        /// <param name="shape">A shape from the TetrominoShape enum</param>
-        /// <param name="orientation">The orientation to assign to this Tetromino</param>
+        /// <param name="shape">A shape from the <c>TetrominoShape</c> <c>enum</c></param>
+        /// <param name="orientation">The orientation to assign to this <c>Tetromino</c></param>
         public Tetromino(TetrominoShape shape, Orientation orientation)
         {
             this.currentShape = shape;
@@ -104,7 +109,7 @@ namespace TetrisTDD
         #region [ Methods ]
 
         /// <summary>
-        /// Gets a string representation of this Tetromino
+        /// Gets a string representation of this <c>Tetromino</c>
         /// </summary>
         /// <returns>A string representation</returns>
         public override string ToString()
@@ -113,7 +118,7 @@ namespace TetrisTDD
         }
 
         /// <summary>
-        /// Rotates this Tetromino 90 degrees clockwise
+        /// Rotates this <c>Tetromino</c> 90 degrees clockwise
         /// </summary>
         public Tetromino RotateRight()
         {
@@ -122,7 +127,7 @@ namespace TetrisTDD
         }
 
         /// <summary>
-        /// Rotates this Tetromino 90 degrees counterclockwise
+        /// Rotates this <c>Tetromino</c> 90 degrees counterclockwise
         /// </summary>
         public Tetromino RotateLeft()
         {
@@ -135,9 +140,8 @@ namespace TetrisTDD
         #region [ Private Helpers ]
 
         /// <summary>
-        /// Gets the appropriate string for a TetrominoShape
+        /// Gets the appropriate string for this <c>Tetromino</c>
         /// </summary>
-        /// <param name="shape">That shape to get a string representation of</param>
         /// <returns>A string representation of the shape</returns>
         private string GetShapeString()
         {
@@ -169,6 +173,8 @@ namespace TetrisTDD
                         default: return string.Empty;
                     }
                 }
+
+                case TetrominoShape.O_SHAPE: return O_SHAPE_STRING;
 
                 default: return string.Empty;
             }

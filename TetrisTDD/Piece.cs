@@ -39,7 +39,7 @@ namespace TetrisTDD
         #region [ Constructor ]
 
         /// <summary>
-        /// Constructs a new (square) Piece 
+        /// Initializes a new instance of the <see cref="Piece"/> class
         /// </summary>
         /// <param name="piece">A string representation of the piece</param>
         public Piece(string piece)

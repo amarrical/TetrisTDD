@@ -2,14 +2,8 @@
 // <copyright file="Block.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
-// <authorPatrick Sheehan</author>
+// <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TetrisTDD
 {
     public class Block

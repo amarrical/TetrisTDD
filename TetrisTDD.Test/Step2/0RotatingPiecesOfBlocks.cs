@@ -18,7 +18,7 @@ namespace TetrisTDD.Test.Step2
     {
         #region [ Fields ]
 
-        // protected Piece piece;
+        protected Piece piece;
 
         #endregion
     }

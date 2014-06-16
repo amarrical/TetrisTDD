@@ -2,7 +2,7 @@
 // <copyright file="_0FallingBlockTests.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
-// <author>Anthony Marrical</author>
+// <author>Christopher Nolan</author>
 //-----------------------------------------------------------------------
 namespace TetrisTDD.Test.Step1
 {
@@ -19,13 +19,14 @@ namespace TetrisTDD.Test.Step1
         #region [ Fields ]
 
         protected Board board;
+        protected Block block;
 
         #endregion
 
         [SetUp]
-        private void SetUp()
+        public void SetUp()
         {
-            // this.board = new Board(3, 3);
+            this.board = new Board(3, 3);
         }
     }
 }

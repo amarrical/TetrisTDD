@@ -15,12 +15,12 @@ namespace TetrisTDD
         #region [ Fields ]
 
         /// <summary>
-        /// Height of the current gameboard
+        /// Height of the current game board
         /// </summary>
         private int height;
 
         /// <summary>
-        /// Width of the current gameboard
+        /// Width of the current game board
         /// </summary>
         private int width;
 
@@ -39,7 +39,7 @@ namespace TetrisTDD
         #region [ Constructor ]
         
         /// <summary>
-        /// Create a new board with the provided height and width
+        /// Initializes a new instance of the <see cref="Board"/> class
         /// </summary>
         /// <param name="height">The height of the game board</param>
         /// <param name="width">The width of the game board</param>
@@ -61,20 +61,22 @@ namespace TetrisTDD
         /// <returns>A string of ASCII Art to represent the board</returns>
         public override string ToString()
         {
-            string boardString = "";
-            for (int row = 0; row < height; row++)
+            string boardString = string.Empty;
+            for (int row = 0; row < this.height; row++)
             {
-                for (int col = 0; col < width; col++)
+                for (int col = 0; col < this.width; col++)
                 {
-                    boardString = string.Concat(boardString, boardArray[row, col]);
+                    boardString = string.Concat(boardString, this.boardArray[row, col]);
                 }
+
                 boardString = string.Concat(boardString, "\n");
             }
+
             return boardString;
         }
 
         /// <summary>
-        /// Returns a bool indicating if any game pieces are currently falling
+        /// Returns a boolean indicating if any game pieces are currently falling
         /// </summary>
         /// <returns>true if game pieces are currently falling, false otherwise</returns>
         public bool HasFalling()
@@ -92,8 +94,9 @@ namespace TetrisTDD
             {
                 throw new System.InvalidOperationException("A block is already falling");
             }
-            int middleColumn = (width - 1) / 2;
-            boardArray[0, middleColumn] = block.blockChar;
+
+            int middleColumn = (this.width - 1) / 2;
+            this.boardArray[0, middleColumn] = block.BlockChar;
             this.hasFalling = true;
         }
 
@@ -113,18 +116,19 @@ namespace TetrisTDD
         public void Tick()
         {
             int numDrops = 0;
-            for (int r = height - 2; r >= 0; r--)
+            for (int r = this.height - 2; r >= 0; r--)
             {
-                for (int c = 0; c < width; c++)
+                for (int c = 0; c < this.width; c++)
                 {
-                    if (boardArray[r, c] != '.' && boardArray[r + 1, c] == '.')
+                    if (this.boardArray[r, c] != '.' && this.boardArray[r + 1, c] == '.')
                     {
-                        boardArray[r + 1, c] = boardArray[r, c];
-                        boardArray[r, c] = '.';
+                        this.boardArray[r + 1, c] = this.boardArray[r, c];
+                        this.boardArray[r, c] = '.';
                         numDrops++;
                     }
                 }
             }
+
             if (numDrops == 0)
             {
                 this.hasFalling = false;
@@ -140,11 +144,11 @@ namespace TetrisTDD
         /// </summary>
         private void ClearBoard()
         {
-            for (int row = 0; row < height; row++)
+            for (int row = 0; row < this.height; row++)
             {
-                for (int col = 0; col < width; col++)
+                for (int col = 0; col < this.width; col++)
                 {
-                    boardArray[row, col] = '.';
+                    this.boardArray[row, col] = '.';
                 }
             }
         }

@@ -11,11 +11,17 @@ namespace TetrisTDD
     /// <summary>
     /// The possible directions for rotation of this piece
     /// </summary>
-    public enum RotationDirection { Right, Left };
+    public enum RotationDirection 
+                { 
+                    Right, 
+                    Left 
+                }
 
+    /// <summary>
+    /// Used to represent a cluster of Blocks
+    /// </summary>
     public class Piece
     {
-
         #region [ Fields ]
 
         /// <summary>
@@ -38,20 +44,20 @@ namespace TetrisTDD
         /// <param name="piece">A string representation of the piece</param>
         public Piece(string piece)
         {
-            string pieceWithoutNewLines = piece.Replace("\n", "");
+            string pieceWithoutNewLines = piece.Replace("\n", string.Empty);
             int numChars = pieceWithoutNewLines.Length;
             bool isSquare = Math.Sqrt(numChars) % 1 == 0;
             if (isSquare)
             {
-                sideLength = (int)Math.Sqrt(numChars); 
-                pieceArray = new Block[sideLength, sideLength];
+                this.sideLength = (int)Math.Sqrt(numChars);
+                this.pieceArray = new Block[this.sideLength, this.sideLength];
 
-                for (int r = 0; r < sideLength; r++)
+                for (int r = 0; r < this.sideLength; r++)
                 {
-                    for (int c = 0; c < sideLength; c++)
+                    for (int c = 0; c < this.sideLength; c++)
                     {
-                        char blockChar = pieceWithoutNewLines[sideLength * r + c];
-                        pieceArray[r, c] = new Block(blockChar);
+                        char blockChar = pieceWithoutNewLines[(this.sideLength * r) + c];
+                        this.pieceArray[r, c] = new Block(blockChar);
                     }
                 }
             }
@@ -59,7 +65,6 @@ namespace TetrisTDD
             { 
                 throw new System.InvalidOperationException("A Piece must have equal side lengths");
             }
-
         }
         
         #endregion
@@ -74,11 +79,11 @@ namespace TetrisTDD
         {
             if (direction == RotationDirection.Right)
             {
-                pieceArray = RotateRight(pieceArray, sideLength);
+                this.pieceArray = RotateRight(this.pieceArray, this.sideLength);
             }
             else if (direction == RotationDirection.Left)
             {
-                pieceArray = RotateLeft(pieceArray, sideLength);
+                this.pieceArray = RotateLeft(this.pieceArray, this.sideLength);
             }
         }
 
@@ -88,15 +93,17 @@ namespace TetrisTDD
         /// <returns>A string of ASCII Art to represent the piece</returns>
         public override string ToString()
         {
-            string pieceString = "";
-            for (int row = 0; row < sideLength; row++)
+            string pieceString = string.Empty;
+            for (int row = 0; row < this.sideLength; row++)
             {
-                for (int col = 0; col < sideLength; col++)
+                for (int col = 0; col < this.sideLength; col++)
                 {
-                    pieceString = string.Concat(pieceString, pieceArray[row, col].blockChar);
+                    pieceString = string.Concat(pieceString, this.pieceArray[row, col].BlockChar);
                 }
+
                 pieceString = string.Concat(pieceString, "\n");
             }
+
             return pieceString;
         }
 
@@ -106,7 +113,7 @@ namespace TetrisTDD
         /// <returns>A copy of this Piece</returns>
         public Piece Clone()
         {
-            string stringCopy = ToString();
+            string stringCopy = this.ToString();
             return new Piece(stringCopy);
         }
 
@@ -157,6 +164,5 @@ namespace TetrisTDD
         }
 
         #endregion
-
     }
 }

@@ -25,7 +25,7 @@ namespace TetrisTDD.Test.Step3
         [SetUp]
         public void CreateAnyShape()
         {
-            shape = new Tetromino(TetrominoShape.T_SHAPE);
+            this.shape = new Tetromino(TetrominoShape.T_SHAPE);
         }
 
         #region [ Tests ]
@@ -33,13 +33,13 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void AreImmutable()
         {
-            string original = shape.ToString();
+            string original = this.shape.ToString();
 
-            shape.RotateRight();
-            Assert.AreEqual(original, shape.ToString());
+            this.shape.RotateRight();
+            Assert.AreEqual(original, this.shape.ToString());
 
-            shape.RotateLeft();
-            Assert.AreEqual(original, shape.ToString());
+            this.shape.RotateLeft();
+            Assert.AreEqual(original, this.shape.ToString());
         }
         #endregion
     }

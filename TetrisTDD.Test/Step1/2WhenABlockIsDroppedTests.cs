@@ -43,7 +43,6 @@ namespace TetrisTDD.Test.Step1
             Assert.AreEqual("...\n.X.\n...\n", this.board.ToString());
         }
 
-
         [Test]
         public void AtMostOneBlockMayBeFallingAtATime()
         {

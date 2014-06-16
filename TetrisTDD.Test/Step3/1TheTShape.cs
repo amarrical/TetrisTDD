@@ -19,7 +19,7 @@ namespace TetrisTDD.Test.Step3
         [SetUp]
         public void CreateTShape()
         {
-            shape = new Tetromino(TetrominoShape.T_SHAPE);
+            this.shape = new Tetromino(TetrominoShape.T_SHAPE);
         }
 
         #region [ Tests ]
@@ -30,53 +30,64 @@ namespace TetrisTDD.Test.Step3
             Assert.AreEqual(
                     ".T.\n" +
                     "TTT\n" +
-                    "...\n", shape.ToString());
+                    "...\n",
+                    this.shape.ToString());
         }
 
         [Test]
         public void CanBeRotatedRight3Times()
         {
-            shape = shape.RotateRight();
+            this.shape = this.shape.RotateRight();
             Assert.AreEqual(
                     ".T.\n" +
                     ".TT\n" +
                     ".T.\n",
                     shape.ToString());
-            shape = shape.RotateRight();
+            this.shape = this.shape.RotateRight();
             Assert.AreEqual(
                     "...\n" +
                     "TTT\n" +
                     ".T.\n",
-                    shape.ToString());
-            shape = shape.RotateRight();
+                    this.shape.ToString());
+            this.shape = this.shape.RotateRight();
             Assert.AreEqual(
                     ".T.\n" +
                     "TT.\n" +
                     ".T.\n",
-                    shape.ToString());
+                    this.shape.ToString());
         }
 
         [Test]
         public void CanBeRotatedLeft3Times()
         {
-            shape = shape.RotateLeft();
+            this.shape = this.shape.RotateLeft();
             Assert.AreEqual(
                     ".T.\n" +
                     "TT.\n" +
                     ".T.\n",
-                    shape.ToString());
-            shape = shape.RotateLeft();
+                    this.shape.ToString());
+            this.shape = this.shape.RotateLeft();
             Assert.AreEqual(
                     "...\n" +
                     "TTT\n" +
                     ".T.\n",
-                    shape.ToString());
-            shape = shape.RotateLeft();
+                    this.shape.ToString());
+            this.shape = this.shape.RotateLeft();
             Assert.AreEqual(
                     ".T.\n" +
                     ".TT\n" +
                     ".T.\n",
-                    shape.ToString());
+                    this.shape.ToString());
+        }
+
+        [Test]
+        public void RotatingIt4TimesWillGoBackToTheOriginalShape()
+        {
+            string original = this.shape.ToString();
+            this.shape = this.shape.RotateRight().RotateRight().RotateRight().RotateRight();
+            Assert.AreEqual(original, shape.ToString());
+            this.shape = this.shape.RotateLeft().RotateLeft().RotateLeft().RotateLeft();
+            Assert.AreEqual(original, this.shape.ToString());
         }
 
         #endregion

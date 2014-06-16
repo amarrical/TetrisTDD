@@ -6,29 +6,30 @@
 //-----------------------------------------------------------------------
 namespace TetrisTDD
 {
+    /// <summary>
+    /// Used to represent a single block in Tetris
+    /// </summary>
     public class Block
     {
-         #region [ Fields ]
-
-        /// <summary>
-        /// Char that represents this block
-        /// </summary>
-        public char blockChar { get; private set; }
-
-        #endregion
-
         #region [ Constructor ]
         
         /// <summary>
-        /// Create a new block that is represented by blockChar
+        /// Initializes a new instance of the <see cref="Block"/> class
         /// </summary>
         /// <param name="blockChar">The char used to represent this block</param>
         public Block(char blockChar)
         {
-            this.blockChar = blockChar;
+            this.BlockChar = blockChar;
         }
-
         #endregion
 
+        #region [ Fields ]
+
+        /// <summary>
+        /// Gets the char that represents this block
+        /// </summary>
+        public char BlockChar { get; private set; }
+
+        #endregion
     }
 }

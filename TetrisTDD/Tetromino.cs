@@ -9,61 +9,116 @@ namespace TetrisTDD
     /// <summary>
     /// Represents the type of shapes a Tetromino can represent
     /// </summary>
-    public enum TetrominoShape { T_SHAPE , I_SHAPE, O_SHAPE };
+    public enum TetrominoShape 
+                { 
+                    T_SHAPE, 
+                    I_SHAPE, 
+                    O_SHAPE 
+                }
 
+    /// <summary>
+    /// Represents the current orientation of a Tetromino
+    /// </summary>
+    public enum Orientation 
+                {
+                    A, 
+                    B,
+                    C,
+                    D 
+                }
+
+    /// <summary>
+    /// Represents one of many possible Tetris game pieces
+    /// </summary>
     public class Tetromino
     {
         #region [ Fields ]
 
         /// <summary>
-        /// The string representation of a T_SHAPE tetromino
+        /// The string representation of a T_SHAPE tetromino at its initial orientation
         /// </summary>
-        private static string T_SHAPE_STRING = ".T.\nTTT\n...\n";
+        private const string T_SHAPE_STRING_A = ".T.\nTTT\n...\n";
 
         /// <summary>
-        /// The piece used to represent this Tetromino shape
+        /// The string representation of a T_SHAPE tetromino at 90 degrees orientation
         /// </summary>
-        private Piece piece;
+        private const string T_SHAPE_STRING_B = ".T.\n.TT\n.T.\n";
+
+        /// <summary>
+        /// The string representation of a T_SHAPE tetromino at 180 degrees orientation
+        /// </summary>
+        private const string T_SHAPE_STRING_C = "...\nTTT\n.T.\n";
+
+        /// <summary>
+        /// The string representation of a T_SHAPE tetromino at 270 degrees orientation
+        /// </summary>
+        private const string T_SHAPE_STRING_D = ".T.\nTT.\n.T.\n";
+
+        /// <summary>
+        /// The string representation of an I_SHAPE tetromino when horizontal
+        /// </summary>
+        private const string I_SHAPE_STRING_HORIZONTAL = ".....\n.....\nIIII.\n.....\n.....\n";
+
+        /// <summary>
+        /// The string representation of an I_SHAPE tetromino when vertical
+        /// </summary>
+        private const string I_SHAPE_STRING_VERTICAL = "..I..\n..I..\n..I..\n..I..\n.....\n";
 
         /// <summary>
         /// The shape representation of this Tetromino
         /// </summary>
         private TetrominoShape currentShape;
 
+        /// <summary>
+        /// The current orientation of the Tetromino
+        /// </summary>
+        private Orientation currentOrientation;
+
         #endregion
 
         #region [ Constructors ]
 
+        /// <summary>
+        /// Constructs a Tetromino given a shape from the TetrominoShape enum
+        /// </summary>
+        /// <param name="shape">A shape from the TetrominoShape enum</param>
         public Tetromino(TetrominoShape shape)
         {
-            currentShape = shape;
-            piece = new Piece(getShapeString(shape));
+            this.currentShape = shape;
+            this.currentOrientation = Orientation.A;
         }
 
-        public Tetromino(TetrominoShape shape, Piece newPiece)
+        /// <summary>
+        /// Constructs a Tetromino given a shape from the TetrominoShape enum
+        /// </summary>
+        /// <param name="shape">A shape from the TetrominoShape enum</param>
+        /// <param name="orientation">The orientation to assign to this Tetromino</param>
+        public Tetromino(TetrominoShape shape, Orientation orientation)
         {
-            currentShape = shape;
-            this.piece = newPiece;
+            this.currentShape = shape;
+            this.currentOrientation = orientation;
         }
 
         #endregion
 
         #region [ Methods ]
 
+        /// <summary>
+        /// Gets a string representation of this Tetromino
+        /// </summary>
+        /// <returns>A string representation</returns>
         public override string ToString()
         {
-            return piece.ToString();
-            //return getShapeString(currentShape);
+            return this.GetShapeString();
         }
+
         /// <summary>
         /// Rotates this Tetromino 90 degrees clockwise
         /// </summary>
         public Tetromino RotateRight()
         {
-            Piece pieceCopy = new Piece(piece.ToString());
-            pieceCopy.Rotate(RotationDirection.Right);
-            Tetromino ret = new Tetromino(currentShape, pieceCopy);
-            return ret;
+            Orientation newOrientation = (Orientation)(((int)this.currentOrientation + 1) % 4);
+            return new Tetromino(this.currentShape, newOrientation);
         }
 
         /// <summary>
@@ -71,23 +126,51 @@ namespace TetrisTDD
         /// </summary>
         public Tetromino RotateLeft()
         {
-            Piece pieceCopy = new Piece(piece.ToString());
-            pieceCopy.Rotate(RotationDirection.Left);
-            Tetromino ret = new Tetromino(currentShape, pieceCopy);
-            return ret;
+            Orientation newOrientation = (Orientation)(((int)this.currentOrientation + 3) % 4);
+            return new Tetromino(this.currentShape, newOrientation);
         }
 
         #endregion
 
         #region [ Private Helpers ]
 
-        private string getShapeString(TetrominoShape shape)
+        /// <summary>
+        /// Gets the appropriate string for a TetrominoShape
+        /// </summary>
+        /// <param name="shape">That shape to get a string representation of</param>
+        /// <returns>A string representation of the shape</returns>
+        private string GetShapeString()
         {
+            TetrominoShape shape = this.currentShape;
+            Orientation orientation = this.currentOrientation;
+
             switch (shape)
             {
-                case TetrominoShape.T_SHAPE: return T_SHAPE_STRING;
+                case TetrominoShape.T_SHAPE:
+                {
+                    switch (orientation)
+                    {
+                        case Orientation.A: return T_SHAPE_STRING_A;
+                        case Orientation.B: return T_SHAPE_STRING_B;
+                        case Orientation.C: return T_SHAPE_STRING_C;
+                        case Orientation.D: return T_SHAPE_STRING_D;
+                        default: return string.Empty;
+                    }
+                }
 
-                default: return "";
+                case TetrominoShape.I_SHAPE:
+                {
+                    switch (orientation)
+                    {
+                        case Orientation.A: return I_SHAPE_STRING_HORIZONTAL;
+                        case Orientation.B: return I_SHAPE_STRING_VERTICAL;
+                        case Orientation.C: return I_SHAPE_STRING_HORIZONTAL;
+                        case Orientation.D: return I_SHAPE_STRING_VERTICAL;
+                        default: return string.Empty;
+                    }
+                }
+
+                default: return string.Empty;
             }
         }
         #endregion

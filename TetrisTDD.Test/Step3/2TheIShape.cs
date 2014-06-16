@@ -39,7 +39,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedRightOnce()
         {
-            this.shape = this.shape.RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right);
             Assert.AreEqual(
                     "..I..\n" +
                     "..I..\n" +
@@ -52,7 +52,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedLeftOnce()
         {
-            this.shape = this.shape.RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left);
             Assert.AreEqual(
                     "..I..\n" +
                     "..I..\n" +
@@ -66,9 +66,9 @@ namespace TetrisTDD.Test.Step3
         public void RotatingItTwiceWillGoBackToTheOriginalShape()
         {
             string original = this.shape.ToString();
-            this.shape = this.shape.RotateRight().RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right, RotationDirection.Right);
             Assert.AreEqual(original, this.shape.ToString());
-            this.shape = this.shape.RotateLeft().RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left, RotationDirection.Left);
             Assert.AreEqual(original, this.shape.ToString());
         }
         #endregion

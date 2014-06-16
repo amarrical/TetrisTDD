@@ -118,20 +118,26 @@ namespace TetrisTDD
         }
 
         /// <summary>
-        /// Rotates this <c>Tetromino</c> 90 degrees clockwise
+        /// Rotates this <c>Tetromino</c> according to rotations in parameter
         /// </summary>
-        public Tetromino RotateRight()
+        /// <param name="rotations">The rotations to apply to this <c>Tetromino</c></param>
+        /// <returns>A new Tetromino with the specified rotations</returns>
+        public Tetromino Rotate(params RotationDirection[] rotations)
         {
-            Orientation newOrientation = (Orientation)(((int)this.currentOrientation + 1) % 4);
-            return new Tetromino(this.currentShape, newOrientation);
-        }
+            Orientation newOrientation = this.currentOrientation;
 
-        /// <summary>
-        /// Rotates this <c>Tetromino</c> 90 degrees counterclockwise
-        /// </summary>
-        public Tetromino RotateLeft()
-        {
-            Orientation newOrientation = (Orientation)(((int)this.currentOrientation + 3) % 4);
+            foreach (RotationDirection rotation in rotations)
+            {
+                if (rotation == RotationDirection.Right)
+                {
+                    newOrientation = (Orientation)(((int)newOrientation + 1) % 4);
+                }
+                else if (rotation == RotationDirection.Left)
+                {
+                    newOrientation = (Orientation)(((int)newOrientation + 3) % 4);
+                }
+            }
+
             return new Tetromino(this.currentShape, newOrientation);
         }
 

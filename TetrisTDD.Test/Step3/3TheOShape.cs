@@ -37,7 +37,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanNotBeRotatedRight()
         {
-            this.shape = this.shape.RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right);
             Assert.AreEqual(
                     ".OO\n" +
                     ".OO\n" +
@@ -48,7 +48,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanNotBeRotatedLeft()
         {
-            this.shape = this.shape.RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left);
             Assert.AreEqual(
                     ".OO\n" +
                     ".OO\n" +

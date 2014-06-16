@@ -37,19 +37,19 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedRight3Times()
         {
-            this.shape = this.shape.RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right);
             Assert.AreEqual(
                     ".T.\n" +
                     ".TT\n" +
                     ".T.\n",
                     shape.ToString());
-            this.shape = this.shape.RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right);
             Assert.AreEqual(
                     "...\n" +
                     "TTT\n" +
                     ".T.\n",
                     this.shape.ToString());
-            this.shape = this.shape.RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right);
             Assert.AreEqual(
                     ".T.\n" +
                     "TT.\n" +
@@ -60,19 +60,19 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedLeft3Times()
         {
-            this.shape = this.shape.RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left);
             Assert.AreEqual(
                     ".T.\n" +
                     "TT.\n" +
                     ".T.\n",
                     this.shape.ToString());
-            this.shape = this.shape.RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left);
             Assert.AreEqual(
                     "...\n" +
                     "TTT\n" +
                     ".T.\n",
                     this.shape.ToString());
-            this.shape = this.shape.RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left);
             Assert.AreEqual(
                     ".T.\n" +
                     ".TT\n" +

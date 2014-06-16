@@ -9,15 +9,6 @@ namespace TetrisTDD
     using System;
  
     /// <summary>
-    /// The possible directions for rotation of this piece
-    /// </summary>
-    public enum RotationDirection 
-                { 
-                    Right, 
-                    Left 
-                }
-
-    /// <summary>
     /// Used to represent a cluster of Blocks
     /// </summary>
     public class Piece

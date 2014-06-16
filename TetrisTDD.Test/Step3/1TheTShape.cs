@@ -84,9 +84,9 @@ namespace TetrisTDD.Test.Step3
         public void RotatingIt4TimesWillGoBackToTheOriginalShape()
         {
             string original = this.shape.ToString();
-            this.shape = this.shape.RotateRight().RotateRight().RotateRight().RotateRight();
+            this.shape = this.shape.Rotate(RotationDirection.Right, RotationDirection.Right, RotationDirection.Right, RotationDirection.Right);
             Assert.AreEqual(original, shape.ToString());
-            this.shape = this.shape.RotateLeft().RotateLeft().RotateLeft().RotateLeft();
+            this.shape = this.shape.Rotate(RotationDirection.Left, RotationDirection.Left, RotationDirection.Left, RotationDirection.Left);
             Assert.AreEqual(original, this.shape.ToString());
         }
 

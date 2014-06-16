@@ -35,10 +35,10 @@ namespace TetrisTDD.Test.Step3
         {
             string original = this.shape.ToString();
 
-            this.shape.RotateRight();
+            this.shape.Rotate(RotationDirection.Right);
             Assert.AreEqual(original, this.shape.ToString());
 
-            this.shape.RotateLeft();
+            this.shape.Rotate(RotationDirection.Left);
             Assert.AreEqual(original, this.shape.ToString());
         }
         #endregion

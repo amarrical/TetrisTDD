@@ -55,6 +55,9 @@
     <Compile Include="Step3\1TheTShape.cs" />
     <Compile Include="Step3\2TheIShape.cs" />
     <Compile Include="Step3\3TheOShape.cs" />
+    <Compile Include="Step4\0FallingPieces.cs" />
+    <Compile Include="Step4\1WhenAPieceIsDropped.cs" />
+    <Compile Include="Step4\2WhenAPieceReachesTheBottom.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

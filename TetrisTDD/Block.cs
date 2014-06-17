@@ -31,5 +31,26 @@ namespace TetrisTDD
         public char BlockChar { get; private set; }
 
         #endregion
+
+        #region [ Methods ]
+
+        /// <summary>
+        /// Returns true if this is an empty block
+        /// </summary>
+        /// <returns>True if block is empty, false otherwise</returns>
+        public bool IsEmpty()
+        {
+            return this.BlockChar == '.';
+        }
+
+        /// <summary>
+        /// Returns a clone of this block
+        /// </summary>
+        /// <returns>A clone of this block</returns>
+        public Block Clone()
+        {
+            return new Block(this.BlockChar);
+        }
+        #endregion
     }
 }

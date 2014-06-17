@@ -16,14 +16,14 @@ namespace TetrisTDD
         #region [ Fields ]
 
         /// <summary>
-        /// Represents this piece as a 2D array of Blocks
+        /// Gets the 2D array of Blocks that represents this piece
         /// </summary>
-        private Block[,] pieceArray;
+        public Block[,] PieceArray { get; private set; }
 
         /// <summary>
-        /// The height and width of this piece
+        /// Gets the height and width of this piece
         /// </summary>
-        private int sideLength;
+        public int SideLength { get; private set; }
 
         #endregion
 
@@ -40,15 +40,15 @@ namespace TetrisTDD
             bool isSquare = Math.Sqrt(numChars) % 1 == 0;
             if (isSquare)
             {
-                this.sideLength = (int)Math.Sqrt(numChars);
-                this.pieceArray = new Block[this.sideLength, this.sideLength];
+                this.SideLength = (int)Math.Sqrt(numChars);
+                this.PieceArray = new Block[this.SideLength, this.SideLength];
 
-                for (int r = 0; r < this.sideLength; r++)
+                for (int r = 0; r < this.SideLength; r++)
                 {
-                    for (int c = 0; c < this.sideLength; c++)
+                    for (int c = 0; c < this.SideLength; c++)
                     {
-                        char blockChar = pieceWithoutNewLines[(this.sideLength * r) + c];
-                        this.pieceArray[r, c] = new Block(blockChar);
+                        char blockChar = pieceWithoutNewLines[(this.SideLength * r) + c];
+                        this.PieceArray[r, c] = new Block(blockChar);
                     }
                 }
             }
@@ -70,11 +70,11 @@ namespace TetrisTDD
         {
             if (direction == RotationDirection.Right)
             {
-                this.pieceArray = RotateRight(this.pieceArray, this.sideLength);
+                this.PieceArray = RotateRight(this.PieceArray, this.SideLength);
             }
             else if (direction == RotationDirection.Left)
             {
-                this.pieceArray = RotateLeft(this.pieceArray, this.sideLength);
+                this.PieceArray = RotateLeft(this.PieceArray, this.SideLength);
             }
         }
 
@@ -85,11 +85,11 @@ namespace TetrisTDD
         public override string ToString()
         {
             string pieceString = string.Empty;
-            for (int row = 0; row < this.sideLength; row++)
+            for (int row = 0; row < this.SideLength; row++)
             {
-                for (int col = 0; col < this.sideLength; col++)
+                for (int col = 0; col < this.SideLength; col++)
                 {
-                    pieceString = string.Concat(pieceString, this.pieceArray[row, col].BlockChar);
+                    pieceString = string.Concat(pieceString, this.PieceArray[row, col].BlockChar);
                 }
 
                 pieceString = string.Concat(pieceString, "\n");

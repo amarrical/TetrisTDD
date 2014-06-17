@@ -16,5 +16,4 @@ namespace TetrisTDD
         C,
         D
     }
-
 }

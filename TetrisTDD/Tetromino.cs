@@ -58,6 +58,10 @@ namespace TetrisTDD
         /// </summary>
         private Orientation currentOrientation;
 
+        public int X { get; set; }
+
+        public int Y { get; set; }
+
         #endregion
 
         #region [ Constructors ]
@@ -100,7 +104,7 @@ namespace TetrisTDD
         /// Rotates this <c>Tetromino</c> according to rotations in parameter
         /// </summary>
         /// <param name="rotations">The rotations to apply to this <c>Tetromino</c></param>
-        /// <returns>A new Tetromino with the specified rotations</returns>
+        /// <returns>A new <c>Tetromino</c> with the specified rotations</returns>
         public Tetromino Rotate(params RotationDirection[] rotations)
         {
             Orientation newOrientation = this.currentOrientation;
@@ -118,6 +122,23 @@ namespace TetrisTDD
             }
 
             return new Tetromino(this.currentShape, newOrientation);
+        }
+
+        /// <summary>
+        /// Gets the width of this <c>Tetromino's</c> enclosing square
+        /// </summary>
+        /// <returns>The width for this <c>Tetromino</c></returns>
+        public int GetWidth()
+        {
+            switch (this.currentShape)
+            {
+                case TetrominoShape.O_SHAPE: return 3;
+                case TetrominoShape.T_SHAPE: return 3;
+                case TetrominoShape.I_SHAPE: return 5;
+                default: break;
+            }
+
+            return -1;
         }
 
         #endregion

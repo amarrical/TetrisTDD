@@ -25,9 +25,9 @@ namespace TetrisTDD
         private int width;
 
         /// <summary>
-        /// Two-Dimensional array to represent the state of the board
+        /// Two-Dimensional array of Blocks to represent the state of the board
         /// </summary>
-        private char[,] boardArray;
+        private Block[,] blockArray;
 
         /// <summary>
         /// Represents if any Blocks are currently falling
@@ -47,7 +47,7 @@ namespace TetrisTDD
         {
             this.height = height;
             this.width = width;
-            this.boardArray = new char[height, width];
+            this.blockArray = new Block[height, width];
             this.ClearBoard();
         }
 
@@ -66,7 +66,7 @@ namespace TetrisTDD
             {
                 for (int col = 0; col < this.width; col++)
                 {
-                    boardString = string.Concat(boardString, this.boardArray[row, col]);
+                    boardString = string.Concat(boardString, this.blockArray[row, col].BlockChar);
                 }
 
                 boardString = string.Concat(boardString, "\n");
@@ -96,8 +96,18 @@ namespace TetrisTDD
             }
 
             int middleColumn = (this.width - 1) / 2;
-            this.boardArray[0, middleColumn] = block.BlockChar;
+            this.blockArray[0, middleColumn] = block;
             this.hasFalling = true;
+        }
+
+        /// <summary>
+        /// Drop a new <c>Tetromino</c> into this game board
+        /// </summary>
+        /// <param name="tetromino">The piece to be dropped</param>
+        public void Drop(Tetromino tetromino)
+        {
+            int midColumn = (this.width - 1) / 2;
+            this.Place(tetromino, 0, midColumn);
         }
 
         /// <summary>
@@ -106,8 +116,7 @@ namespace TetrisTDD
         /// <param name="block">The char representation of a new block to drop into the board</param>
         public void Drop(char block)
         {
-            Block b = new Block(block);
-            this.Drop(b);
+            this.Drop(new Block(block));
         }
 
         /// <summary>
@@ -120,18 +129,30 @@ namespace TetrisTDD
             {
                 for (int c = 0; c < this.width; c++)
                 {
-                    if (this.boardArray[r, c] != '.' && this.boardArray[r + 1, c] == '.')
+                    if (!this.blockArray[r, c].IsEmpty() 
+                        && this.blockArray[r + 1, c].IsEmpty())
                     {
-                        this.boardArray[r + 1, c] = this.boardArray[r, c];
-                        this.boardArray[r, c] = '.';
+                        this.blockArray[r + 1, c] = this.blockArray[r, c].Clone();
+                        this.blockArray[r, c] = new Block('.');
                         numDrops++;
                     }
                 }
             }
 
-            if (numDrops == 0)
+            this.hasFalling = numDrops > 0;
+        }
+
+        /// <summary>
+        /// Clears all spaces on the board
+        /// </summary>
+        public void ClearBoard()
+        {
+            for (int row = 0; row < this.height; row++)
             {
-                this.hasFalling = false;
+                for (int col = 0; col < this.width; col++)
+                {
+                    this.blockArray[row, col] = new Block('.');
+                }
             }
         }
 
@@ -139,16 +160,47 @@ namespace TetrisTDD
 
         #region [ Private Helpers ]
 
-        /// <summary>
-        /// Clears all spaces on the board
-        /// </summary>
-        private void ClearBoard()
+        private Grid GetSubGrid(int row, int column, int height, int width)
         {
-            for (int row = 0; row < this.height; row++)
+            Grid grid = new Grid(height, width);
+            for (int i = 0; i < height; i++)
             {
-                for (int col = 0; col < this.width; col++)
+                for (int j = 0; j < width; j++)
                 {
-                    this.boardArray[row, col] = '.';
+                    grid.BlockArray[i, j] = this.blockArray[row + i, column + j];
+                }
+            }
+
+            return grid;
+        }
+
+        /// <summary>
+        /// Places a new <c>Tetromino</c> at a specific place on this game board
+        /// </summary>
+        /// <param name="tetromino">The <c>Tetromino</c> to be placed</param>
+        /// <param name="row">The row of the game board (zero is at the top)</param>
+        /// <param name="column">The column of the game board</param>
+        private void Place(Tetromino tetromino, int row, int column)
+        {
+            int tetWidth = tetromino.GetWidth();
+            Grid grid = this.GetSubGrid(row, column, tetWidth, tetWidth);
+            bool conflict = grid.HasConflict(tetromino, 0, 0);
+            
+            if (!conflict)
+            {
+                tetromino.X = row;
+                tetromino.Y = column;
+                Piece tetPiece = new Piece(tetromino.ToString());
+
+                for (int i = 0; i < tetWidth; i++)
+                {
+                    for (int j = 0; j < tetWidth; j++)
+                    {
+                        if (!tetPiece.PieceArray[i, j].IsEmpty())
+                        {
+                            this.blockArray[i + row, j + column] = tetPiece.PieceArray[i, j];
+                        }
+                    }
                 }
             }
         }

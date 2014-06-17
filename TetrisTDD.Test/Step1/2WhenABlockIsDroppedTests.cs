@@ -33,7 +33,7 @@ namespace TetrisTDD.Test.Step1
         [Test]
         public void ItStartsFromTopMiddle()
         {
-            Assert.AreEqual(".X.\n...\n...\n", board.ToString());
+            Assert.AreEqual(".X.\n...\n...\n", this.board.ToString());
         }
 
         [Test]

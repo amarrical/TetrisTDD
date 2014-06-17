@@ -33,6 +33,7 @@ namespace TetrisTDD.Test.Step1
         #region [ Tests ]
 
         [Test]
+        [Ignore]
         public void BoardStillHasFallingRightAboveOtherBlock()
         {
             Assert.IsTrue(this.board.HasFalling());
@@ -40,6 +41,7 @@ namespace TetrisTDD.Test.Step1
         }
 
         [Test]
+        [Ignore]
         public void BlockStopsWhenItHitsTheOtherBlock()
         {
             this.board.Tick();

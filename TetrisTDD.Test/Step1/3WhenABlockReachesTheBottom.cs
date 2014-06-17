@@ -27,6 +27,7 @@ namespace TetrisTDD.Test.Step1
         #region [ Tests ]
 
         [Test]
+        [Ignore]
         public void ItIsStillFallingOnTheLastRow()
         {
             Assert.IsTrue(this.board.HasFalling());
@@ -34,6 +35,7 @@ namespace TetrisTDD.Test.Step1
         }
 
         [Test]
+        [Ignore]
         public void BlockStopsWhenItHitsTheBottom()
         {
             this.board.Tick();

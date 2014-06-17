@@ -77,10 +77,20 @@ namespace TetrisTDD
             {
                 for (int j = 0; j < pieceLength; j++)
                 {
-                    if (!pieceArray[i, j].IsEmpty() 
-                        && !this.BlockArray[row + i, column + j].IsEmpty())
+                    if (!pieceArray[i, j].IsEmpty())
                     {
-                        return true;
+                        if (row + i >= this.Height
+                            || column + j >= this.Width
+                            || !this.BlockArray[row + i, column + j].IsEmpty())
+                        {
+                            return true;
+                        }
+
+                        //if (!pieceArray[i, j].IsEmpty() 
+                        //    && !this.BlockArray[row + i, column + j].IsEmpty())
+                        //{
+                        //    return true;
+                        //}
                     }
                 }
             }

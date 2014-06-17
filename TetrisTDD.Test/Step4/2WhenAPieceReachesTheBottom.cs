@@ -29,7 +29,6 @@ namespace TetrisTDD.Test.Step4
         [Test]
         public void ItIsStillFallingOnTheLastRow()
         {
-            string boardString = this.board.ToString();
             Assert.AreEqual(
                     "........\n" +
                     "........\n" +
@@ -37,7 +36,7 @@ namespace TetrisTDD.Test.Step4
                     "........\n" +
                     "....T...\n" +
                     "...TTT..\n",
-                    boardString);
+                    this.board.ToString());
             Assert.IsTrue(this.board.HasFalling());
             this.board.ClearBoard();
         }
@@ -46,7 +45,6 @@ namespace TetrisTDD.Test.Step4
         public void ItStopsWhenItHitsTheBottom()
         {
             this.board.Tick();
-            string boardString = this.board.ToString();
             Assert.AreEqual(
                     "........\n" +
                     "........\n" +
@@ -54,7 +52,7 @@ namespace TetrisTDD.Test.Step4
                     "........\n" +
                     "....T...\n" +
                     "...TTT..\n",
-                    boardString);
+                    this.board.ToString());
             Assert.IsFalse(this.board.HasFalling());
             this.board.ClearBoard();
         }

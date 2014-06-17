@@ -34,6 +34,8 @@ namespace TetrisTDD
         /// </summary>
         private bool hasFalling;
 
+        public Tetromino FallingTetromino;
+
         #endregion
 
         #region [ Constructor ]
@@ -107,6 +109,9 @@ namespace TetrisTDD
         public void Drop(Tetromino tetromino)
         {
             int midColumn = (this.width - 1) / 2;
+            int tetHeight = tetromino.GetWidth();
+            this.hasFalling = true;
+
             this.Place(tetromino, 0, midColumn);
         }
 
@@ -124,22 +129,35 @@ namespace TetrisTDD
         /// </summary>
         public void Tick()
         {
-            int numDrops = 0;
-            for (int r = this.height - 2; r >= 0; r--)
+            if (this.hasFalling && this.FallingTetromino != null)
             {
-                for (int c = 0; c < this.width; c++)
+                this.hasFalling = this.AttemptToMoveTetriminoDown();
+                if (!this.hasFalling)
                 {
-                    if (!this.blockArray[r, c].IsEmpty() 
-                        && this.blockArray[r + 1, c].IsEmpty())
-                    {
-                        this.blockArray[r + 1, c] = this.blockArray[r, c].Clone();
-                        this.blockArray[r, c] = new Block('.');
-                        numDrops++;
-                    }
+                    this.FallingTetromino = null;
                 }
             }
 
-            this.hasFalling = numDrops > 0;
+            //int numDrops = 0;
+            //for (int r = this.height - 2; r >= 0; r--)
+            //{
+            //    for (int c = 0; c < this.width; c++)
+            //    {
+            //        if (!this.blockArray[r, c].IsEmpty() 
+            //            && this.blockArray[r + 1, c].IsEmpty())
+            //        {
+            //            this.blockArray[r + 1, c] = this.blockArray[r, c].Clone();
+            //            this.blockArray[r, c] = new Block('.');
+            //            numDrops++;
+            //        }
+            //    }
+            //}
+
+            //this.hasFalling = numDrops > 0;
+            //if (!this.hasFalling)
+            //{
+            //    this.FallingTetromino = null;
+            //}
         }
 
         /// <summary>
@@ -160,12 +178,21 @@ namespace TetrisTDD
 
         #region [ Private Helpers ]
 
-        private Grid GetSubGrid(int row, int column, int height, int width)
+        private Grid GetSubGrid(int row, int column, int gHeight, int gWidth)
         {
-            Grid grid = new Grid(height, width);
-            for (int i = 0; i < height; i++)
+            if (row + gHeight > this.height)
             {
-                for (int j = 0; j < width; j++)
+                gHeight = this.height - row;
+            }
+            if (column + gWidth > this.width)
+            {
+                gWidth = this.width - column;
+            }
+
+            Grid grid = new Grid(gHeight, gWidth);
+            for (int i = 0; i < gHeight; i++)
+            {
+                for (int j = 0; j < gWidth; j++)
                 {
                     grid.BlockArray[i, j] = this.blockArray[row + i, column + j];
                 }
@@ -175,19 +202,20 @@ namespace TetrisTDD
         }
 
         /// <summary>
-        /// Places a new <c>Tetromino</c> at a specific place on this game board
+        /// Attempts to place a new <c>Tetromino</c> at the specified location on this game board
         /// </summary>
         /// <param name="tetromino">The <c>Tetromino</c> to be placed</param>
         /// <param name="row">The row of the game board (zero is at the top)</param>
         /// <param name="column">The column of the game board</param>
-        private void Place(Tetromino tetromino, int row, int column)
+        /// <returns>True on success, false otherwise</returns>
+        private bool Place(Tetromino tetromino, int row, int column)
         {
             int tetWidth = tetromino.GetWidth();
             Grid grid = this.GetSubGrid(row, column, tetWidth, tetWidth);
-            bool conflict = grid.HasConflict(tetromino, 0, 0);
-            
-            if (!conflict)
+
+            if (grid != null && !grid.HasConflict(tetromino, 0, 0))
             {
+                this.FallingTetromino = tetromino;
                 tetromino.X = row;
                 tetromino.Y = column;
                 Piece tetPiece = new Piece(tetromino.ToString());
@@ -196,10 +224,41 @@ namespace TetrisTDD
                 {
                     for (int j = 0; j < tetWidth; j++)
                     {
-                        if (!tetPiece.PieceArray[i, j].IsEmpty())
+                        if (!tetPiece.PieceArray[i, j].IsEmpty() && i + row < this.height && j + column < this.width)
                         {
                             this.blockArray[i + row, j + column] = tetPiece.PieceArray[i, j];
                         }
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private bool AttemptToMoveTetriminoDown()
+        {
+            this.Remove(this.FallingTetromino);
+            if (this.Place(this.FallingTetromino, this.FallingTetromino.X + 1, this.FallingTetromino.Y))
+            {
+                return true;
+            }
+            else
+            {
+                this.Place(this.FallingTetromino, this.FallingTetromino.X, this.FallingTetromino.Y);
+                return false;
+            }
+        }
+
+        private void Remove(Tetromino tetromino)
+        {
+            Piece piece = new Piece(tetromino.ToString());
+            for (int row = 0; row < tetromino.GetWidth(); row++)
+            {
+                for (int col = 0; col < tetromino.GetWidth(); col++)
+                {
+                    if (!piece.PieceArray[row, col].IsEmpty())
+                    {
+                        this.blockArray[row + tetromino.X, col + tetromino.Y].SetEmpty();
                     }
                 }
             }

@@ -48,7 +48,8 @@ namespace TetrisTDD
                     for (int c = 0; c < this.SideLength; c++)
                     {
                         char blockChar = pieceWithoutNewLines[(this.SideLength * r) + c];
-                        this.PieceArray[r, c] = new Block(blockChar);
+                        Block block = new Block(blockChar);
+                        this.PieceArray[r, c] = block;
                     }
                 }
             }

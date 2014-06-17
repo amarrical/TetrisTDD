@@ -37,6 +37,7 @@ namespace TetrisTDD.Test.Step1
         }
 
         [Test]
+        [Ignore]
         public void ItMovesDownOneRowPerTick()
         {
             board.Tick();

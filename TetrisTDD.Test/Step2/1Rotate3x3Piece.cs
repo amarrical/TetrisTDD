@@ -2,12 +2,12 @@
 // <copyright file="_1Rotate3x3Piece.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
-// <author>Anthony Marrical</author>
+// <author>Christopher Nolan</author>
 //-----------------------------------------------------------------------
 namespace TetrisTDD.Test.Step2
 {
     using System.Diagnostics.CodeAnalysis;
-
+    using TetrisTDD; 
     using NUnit.Framework;
     
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
@@ -16,51 +16,49 @@ namespace TetrisTDD.Test.Step2
     [TestFixture]
     public class _1Rotate3x3Piece : _0RotatingPiecesOfBlocks
     {
-        //[SetUp]
-        //public void CreateAPiece()
-        //{
-        //    this.piece = new Piece(
-        //            ".X.\n" +
-        //            ".X.\n" +
-        //            "...\n");
-        //}
+        [SetUp]
+        public void CreateAPiece()
+        {
+            this.piece = new Piece(
+                    ".X.\n" +
+                    ".X.\n" +
+                    "...\n");
+        }
 
         #region [ Tests ]
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void PieceConsistsOfManyBlocks()
-        //{
-        //    Assert.AreEqual(
-        //        ".X.\n" +
-        //        ".X.\n" +
-        //        "...\n",
-        //        this.piece.ToString());
-        //}
+        [Test]
+        public void PieceConsistsOfManyBlocks()
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void CanBeRotatedRight()
-        //{
-        //    this.piece.Rotate(RotationDirection.Right);
-        //    Assert.AreEqual(
-        //        "...\n" +
-        //        ".XX\n" +
-        //        "...\n",
-        //        this.piece.ToString());
-        //}
+        {
+            Assert.AreEqual(
+                ".X.\n" +
+                ".X.\n" +
+                "...\n",
+                this.piece.ToString());
+        }
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void CanBeRotatedLeft()
-        //{
-        //    this.piece.Rotate(RotationDirection.Left);
-        //    Assert.AreEqual(
-        //        "...\n" +
-        //        "XX.\n" +
-        //        "...\n",
-        //        this.piece.ToString());
-        //}
+        [Test]
+        public void CanBeRotatedRight()
+        {
+            this.piece.Rotate(RotationDirection.Right);
+            Assert.AreEqual(
+                "...\n" +
+                ".XX\n" +
+                "...\n",
+                this.piece.ToString());
+        }
+
+        [Test]
+        public void CanBeRotatedLeft()
+        {
+            this.piece.Rotate(RotationDirection.Left);
+            Assert.AreEqual(
+                "...\n" +
+                "XX.\n" +
+                "...\n",
+                this.piece.ToString());
+        }
 
         #endregion
     }

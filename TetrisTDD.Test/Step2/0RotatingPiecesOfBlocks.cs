@@ -2,7 +2,7 @@
 // <copyright file="_0RotatingPiecesOfBlocks.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
-// <author>Anthony Marrical</author>
+// <author>Christopher Nolan</author>
 //-----------------------------------------------------------------------
 namespace TetrisTDD.Test.Step2
 {
@@ -18,7 +18,7 @@ namespace TetrisTDD.Test.Step2
     {
         #region [ Fields ]
 
-        // protected Piece piece;
+        protected Piece piece;
 
         #endregion
     }

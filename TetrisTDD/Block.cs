@@ -19,7 +19,6 @@ namespace TetrisTDD
             this.shape = shape; 
         }
 
-
         public char shape { get; set; }
     }
 }

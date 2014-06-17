@@ -75,6 +75,20 @@ namespace TetrisTDD
         }
         #endregion 
 
+        #region [ properties ]
+
+        /// <summary>
+        /// Gets or sets the width variable
+        /// </summary>
+        public int Width { get; set; }
+
+        /// <summary>
+        /// Gets or sets the length variable
+        /// </summary>
+        public int Length { get; set; }
+        
+        #endregion
+
         #region [ overrides ]
         /// <summary>
         /// Overrides the ToString function to convert members of a Board to a string
@@ -106,7 +120,7 @@ namespace TetrisTDD
 
         #endregion
 
-        #region [ interface ] 
+        #region [ methods ] 
         /// <summary>
         /// determines if the Board has falling blocks
         /// </summary>
@@ -167,15 +181,5 @@ namespace TetrisTDD
         }
 
         #endregion 
-
-        /// <summary>
-        /// Gets or sets the width variable
-        /// </summary>
-        public int Width { get; set; }
-
-        /// <summary>
-        /// Gets or sets the length variable
-        /// </summary>
-        public int Length { get; set; }
     }
 }

@@ -39,14 +39,13 @@ namespace TetrisTDD.Test.Step1
             Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
         }
 
-        //[Test]
-        //[Ignore("Test not complete")]
-        //public void BlockStopsWhenItHitsTheOtherBlock()
-        //{
-        //    this.board.Tick();
-        //    Assert.IsFalse(this.board.HasFalling());
-        //    Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
-        //}
+        [Test]
+        public void BlockStopsWhenItHitsTheOtherBlock()
+        {
+            this.board.Tick();
+            Assert.IsFalse(this.board.HasFalling());
+            Assert.AreEqual("...\n.Y.\n.X.\n", this.board.ToString());
+        }
 
         #endregion
     }

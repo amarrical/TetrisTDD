@@ -92,6 +92,7 @@ namespace TetrisTDD
             
             if (!this.hasFalling)
             {
+                this.Remove(this.fallingTetromino);
                 this.Place(this.fallingTetromino, originalLoc);
             }
 
@@ -223,12 +224,17 @@ namespace TetrisTDD
                 gridWidth = this.width - column;
             }
 
+            row = (row < 0) ? 0 : row;
+            column = (column < 0) ? 0 : column;
+
             Grid grid = new Grid(gridHeight, gridWidth);
             for (int i = 0; i < gridHeight; i++)
             {
                 for (int j = 0; j < gridWidth; j++)
                 {
-                    grid.BlockArray[i, j] = this.blockArray[row + i, column + j];
+                    int rowToCopy = row + i;
+                    int colToCopy = column + j;
+                    grid.BlockArray[i, j] = this.blockArray[rowToCopy, colToCopy];
                 }
             }
 
@@ -246,7 +252,7 @@ namespace TetrisTDD
             int tetWidth = tetromino.GetWidth();
             Grid grid = this.GetSubGrid(location.Y, location.X, tetWidth, tetWidth);
 
-            if (grid != null && !grid.HasConflict(tetromino, 0, 0))
+            if (grid != null && !grid.HasConflict(tetromino, new Location(0, 0)))
             {
                 this.fallingTetromino = tetromino;
                 tetromino.SetLocation(location);
@@ -256,9 +262,21 @@ namespace TetrisTDD
                 {
                     for (int j = 0; j < tetWidth; j++)
                     {
-                        if (!tetPiece.PieceArray[i, j].IsEmpty() && i + location.Y < this.height && j + location.X < this.width)
+                        int rowToCopy = i + location.Y;
+                        int colToCopy = j + location.X;
+                        if (!tetPiece.PieceArray[i, j].IsEmpty())
                         {
-                            this.blockArray[i + location.Y, j + location.X] = tetPiece.PieceArray[i, j];
+                            if (rowToCopy < this.height
+                                && rowToCopy >= 0
+                                && colToCopy < this.width
+                                && colToCopy >= 0)
+                            {   // Tetromino's block is nonempty and in range, copy it
+                                this.blockArray[rowToCopy, colToCopy] = tetPiece.PieceArray[i, j];
+                            }
+                            else
+                            {   // Tetromino's block is nonemepty and out of range, cannot place it here
+                                return false;
+                            }
                         }
                     }
                 }
@@ -280,9 +298,15 @@ namespace TetrisTDD
             {
                 for (int col = 0; col < tetromino.GetWidth(); col++)
                 {
-                    if (!piece.PieceArray[row, col].IsEmpty())
+                    int rowToEmpty = row + tetromino.Location.Y;
+                    int colToEmpty = col + tetromino.Location.X;
+                    if (!piece.PieceArray[row, col].IsEmpty()
+                        && rowToEmpty >= 0
+                        && colToEmpty >= 0
+                        && rowToEmpty < this.height
+                        && colToEmpty < this.width)
                     {
-                        this.blockArray[row + tetromino.Location.Y, col + tetromino.Location.X].SetEmpty();
+                        this.blockArray[rowToEmpty, colToEmpty].SetEmpty();
                     }
                 }
             }

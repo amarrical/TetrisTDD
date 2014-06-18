@@ -42,7 +42,6 @@ namespace TetrisTDD.Test.Step4
         }
 
         [Test]
-        [Ignore]
         public void ItStopsWhenItHitsTheBottom()
         {
             this.board.Tick();

@@ -114,9 +114,82 @@ namespace TetrisTDD.Test.Step5
             Assert.IsTrue(this.board.HasFalling());
         }
 
-        // TODO: it will not move left over over the board
-        // TODO: it will not move right over over the board
-        // TODO: it will not move down over over the board (will stop falling)
+        [Test]
+        public void CanNotMoveLeftPastBorder()
+        {
+            this.board.MovePiece(MoveDirection.Left);
+            this.board.MovePiece(MoveDirection.Left);
+            this.board.MovePiece(MoveDirection.Left);
+            Assert.AreEqual(
+                ".T......\n" +
+                "TTT.....\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n",
+                this.board.ToString());
+            this.board.MovePiece(MoveDirection.Left);
+            Assert.AreEqual(
+                ".T......\n" +
+                "TTT.....\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n",
+                this.board.ToString());
+        }
+
+        [Test]
+        public void CanNotMoveRightPastBorder()
+        {
+            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(MoveDirection.Right);
+            Assert.AreEqual(
+                "......T.\n" +
+                ".....TTT\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n",
+                this.board.ToString());
+            this.board.MovePiece(MoveDirection.Right);
+            Assert.AreEqual(
+                "......T.\n" +
+                ".....TTT\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n",
+                this.board.ToString());
+        }
+
+        [Test]
+        public void CanNotMoveDownPastBorder()
+        {
+            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(MoveDirection.Down);
+            Assert.AreEqual(
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "....T...\n" +
+                "...TTT..\n",
+                this.board.ToString());
+            this.board.MovePiece(MoveDirection.Down);
+            Assert.AreEqual(
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "....T...\n" +
+                "...TTT..\n",
+                this.board.ToString());
+        }
+
         // TODO: it can not be moved left if another piece is in the way
         // TODO: it can not be moved right if another piece is in the way
         // TODO: it can not be moved down if another piece is in the way (will stop falling)

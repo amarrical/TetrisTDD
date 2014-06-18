@@ -12,41 +12,41 @@ namespace TetrisTDD
     public class Tetromino
     {
         #region [ Fields ]
-
+        
         /// <summary>
         /// The string representation of a T_SHAPE <c>Tetromino</c> at its initial orientation
         /// </summary>
-        private const string T_SHAPE_STRING_A = ".T.\nTTT\n...\n";
+        private const string TShapeStringA = ".T.\nTTT\n...\n";
 
         /// <summary>
         /// The string representation of a T_SHAPE <c>Tetromino</c> at 90 degrees orientation
         /// </summary>
-        private const string T_SHAPE_STRING_B = ".T.\n.TT\n.T.\n";
+        private const string TShapeStringB = ".T.\n.TT\n.T.\n";
 
         /// <summary>
         /// The string representation of a T_SHAPE <c>Tetromino</c> at 180 degrees orientation
         /// </summary>
-        private const string T_SHAPE_STRING_C = "...\nTTT\n.T.\n";
+        private const string TShapeStringC = "...\nTTT\n.T.\n";
 
         /// <summary>
         /// The string representation of a T_SHAPE <c>Tetromino</c> at 270 degrees orientation
         /// </summary>
-        private const string T_SHAPE_STRING_D = ".T.\nTT.\n.T.\n";
+        private const string TShapeStringD = ".T.\nTT.\n.T.\n";
 
         /// <summary>
         /// The string representation of an I_SHAPE <c>Tetromino</c> when horizontal
         /// </summary>
-        private const string I_SHAPE_STRING_HORIZONTAL = ".....\n.....\nIIII.\n.....\n.....\n";
+        private const string IShapeStringHorizontal = ".....\n.....\nIIII.\n.....\n.....\n";
 
         /// <summary>
         /// The string representation of an I_SHAPE <c>Tetromino</c> when vertical
         /// </summary>
-        private const string I_SHAPE_STRING_VERTICAL = "..I..\n..I..\n..I..\n..I..\n.....\n";
+        private const string IShapeStringVertical = "..I..\n..I..\n..I..\n..I..\n.....\n";
 
         /// <summary>
         /// The string representation of an O_SHAPE <c>Tetromino</c>
         /// </summary>
-        private const string O_SHAPE_STRING = ".OO\n.OO\n...\n";
+        private const string OShapeString = ".OO\n.OO\n...\n";
 
         /// <summary>
         /// The shape representation of this <c>Tetromino</c>
@@ -180,10 +180,10 @@ namespace TetrisTDD
                 {
                     switch (orientation)
                     {
-                        case Orientation.A: return T_SHAPE_STRING_A;
-                        case Orientation.B: return T_SHAPE_STRING_B;
-                        case Orientation.C: return T_SHAPE_STRING_C;
-                        case Orientation.D: return T_SHAPE_STRING_D;
+                        case Orientation.A: return TShapeStringA;
+                        case Orientation.B: return TShapeStringB;
+                        case Orientation.C: return TShapeStringC;
+                        case Orientation.D: return TShapeStringD;
                         default: return string.Empty;
                     }
                 }
@@ -192,15 +192,15 @@ namespace TetrisTDD
                 {
                     switch (orientation)
                     {
-                        case Orientation.A: return I_SHAPE_STRING_HORIZONTAL;
-                        case Orientation.B: return I_SHAPE_STRING_VERTICAL;
-                        case Orientation.C: return I_SHAPE_STRING_HORIZONTAL;
-                        case Orientation.D: return I_SHAPE_STRING_VERTICAL;
+                        case Orientation.A: return IShapeStringHorizontal;
+                        case Orientation.B: return IShapeStringVertical;
+                        case Orientation.C: return IShapeStringHorizontal;
+                        case Orientation.D: return IShapeStringVertical;
                         default: return string.Empty;
                     }
                 }
 
-                case TetrominoShape.O_SHAPE: return O_SHAPE_STRING;
+                case TetrominoShape.O_SHAPE: return OShapeString;
 
                 default: return string.Empty;
             }

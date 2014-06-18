@@ -52,23 +52,21 @@ namespace TetrisTDD
         /// Returns true if there is any overlap between the <c>Tetromino</c> and the existing blocks at the given location
         /// </summary>
         /// <param name="tetromino">The <c>Tetromino</c> to be checked</param>
-        /// <param name="row">The row of the top left location where the <c>Tetromino</c> should be checked</param>
-        /// <param name="column">The column of the top left location where the <c>Tetromino</c> should be checked</param>
+        /// <param name="location">The Grid location to check for a conflict</param>
         /// <returns>True if there is a conflict, false otherwise</returns>
-        public bool HasConflict(Tetromino tetromino, int row, int column)
+        public bool HasConflict(Tetromino tetromino, Location location)
         {
             Piece piece = new Piece(tetromino.ToString());
-            return this.HasConflict(piece, row, column);
+            return this.HasConflict(piece, location);
         }
 
         /// <summary>
         /// Returns true if there is any overlap between the piece and the existing blocks at the given location
         /// </summary>
         /// <param name="piece">The Piece to be checked</param>
-        /// <param name="row">The row of the location where the piece should be checked</param>
-        /// <param name="column">The column of the location where the piece should be checked</param>
+        /// <param name="location">The Grid location to check for a conflict</param>
         /// <returns>True if there is a conflict, false otherwise</returns>
-        public bool HasConflict(Piece piece, int row, int column)
+        public bool HasConflict(Piece piece, Location location)
         {
             int pieceLength = piece.SideLength;
             Block[,] pieceArray = piece.PieceArray;
@@ -79,9 +77,13 @@ namespace TetrisTDD
                 {
                     if (!pieceArray[i, j].IsEmpty())
                     {
-                        if (row + i >= this.Height
-                            || column + j >= this.Width
-                            || !this.BlockArray[row + i, column + j].IsEmpty())
+                        int gridRow = location.X + i;
+                        int gridCol = location.Y + j;
+                        if (gridRow >= this.Height
+                            || gridRow < 0
+                            || gridCol >= this.Width
+                            || gridCol < 0
+                            || !this.BlockArray[gridRow, gridCol].IsEmpty())
                         {
                             return true;
                         }

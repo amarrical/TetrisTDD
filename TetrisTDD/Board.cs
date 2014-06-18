@@ -61,6 +61,57 @@ namespace TetrisTDD
         #region [ Methods ]
 
         /// <summary>
+        /// Rotates the currently falling piece according to the specified direction
+        /// </summary>
+        /// <param name="direction">The direction to rotate the falling piece</param>
+        /// <returns>True on success, false otherwise</returns>
+        public bool Rotate(RotationDirection direction)
+        {
+            if (this.fallingTetromino == null || !this.hasFalling)
+            {
+                return false;
+            }
+
+            Tetromino rotatedTet = this.fallingTetromino.Rotate(direction);
+            Location originalLocation = this.fallingTetromino.Location;
+            Location locToLeft = new Location(originalLocation.X - 1, originalLocation.Y);
+            Location locToRight = new Location(originalLocation.X + 1, originalLocation.Y);
+
+            this.Remove(this.fallingTetromino);
+
+            bool success = false;
+
+            if (!success)
+            {   // Try placing the rotated piece in the same location
+                success = this.Place(rotatedTet, originalLocation);
+                rotatedTet.SetLocation(originalLocation);
+            }
+
+            if (!success)
+            {   // Try placing the rotated piece one block to the left
+                success = this.Place(rotatedTet, locToLeft);
+                rotatedTet.SetLocation(locToLeft);
+            }
+
+            if (!success)
+            {   // Try placing the rotated piece one block to the right
+                success = this.Place(rotatedTet, locToRight);
+                rotatedTet.SetLocation(locToRight);
+            }
+
+            if (success)
+            {   // Use the rotated Tetromino if it was placed successfully
+                this.fallingTetromino = rotatedTet;
+            }
+            else
+            {   // If all else fails, put the piece back in its original spot
+                this.Place(this.fallingTetromino, originalLocation);
+            }
+
+            return success;
+        }
+
+        /// <summary>
         /// Moves the current falling <c>Tetromino</c> according to the MoveDirection
         /// </summary>
         /// <param name="direction">The direction to move the falling <c>Tetromino</c></param>
@@ -72,9 +123,10 @@ namespace TetrisTDD
                 return false;
             }
 
-            this.Remove(this.fallingTetromino);
             Location originalLoc = this.fallingTetromino.Location;
             Location newLoc = originalLoc;
+            this.Remove(this.fallingTetromino);
+
             if (direction == MoveDirection.Left)
             {
                 newLoc = new Location(originalLoc.X - 1, originalLoc.Y);
@@ -144,6 +196,18 @@ namespace TetrisTDD
         public void Drop(char block)
         {
             this.Drop(new Block(block));
+        }
+
+        /// <summary>
+        /// Performs a specified number of ticks on this Board
+        /// </summary>
+        /// <param name="numTicks">The number of ticks to perform</param>
+        public void Ticks(int numTicks)
+        {
+            for (int i = 0; i < numTicks; i++)
+            {
+                this.Tick();
+            }
         }
 
         /// <summary>
@@ -224,9 +288,6 @@ namespace TetrisTDD
                 gridWidth = this.width - column;
             }
 
-            row = (row < 0) ? 0 : row;
-            column = (column < 0) ? 0 : column;
-
             Grid grid = new Grid(gridHeight, gridWidth);
             for (int i = 0; i < gridHeight; i++)
             {
@@ -234,7 +295,10 @@ namespace TetrisTDD
                 {
                     int rowToCopy = row + i;
                     int colToCopy = column + j;
-                    grid.BlockArray[i, j] = this.blockArray[rowToCopy, colToCopy];
+                    if (rowToCopy >= 0 && colToCopy >= 0)
+                    {
+                        grid.BlockArray[i, j] = this.blockArray[rowToCopy, colToCopy];
+                    }
                 }
             }
 

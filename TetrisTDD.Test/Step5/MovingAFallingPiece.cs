@@ -186,7 +186,6 @@ namespace TetrisTDD.Test.Step5
                 this.board.ToString());
         }
 
-       
         #endregion
     }
 }

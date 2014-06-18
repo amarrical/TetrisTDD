@@ -83,6 +83,7 @@ namespace TetrisTDD
                             || gridRow < 0
                             || gridCol >= this.Width
                             || gridCol < 0
+                            || this.BlockArray[gridRow, gridCol] == null
                             || !this.BlockArray[gridRow, gridCol].IsEmpty())
                         {
                             return true;

@@ -61,6 +61,9 @@
     <Compile Include="Step4\3WhenAPieceLandsOnAnotherPiece.cs" />
     <Compile Include="Step5\MovingAFallingPiece.cs" />
     <Compile Include="Step5\MovingPieceIntoAnotherPiece.cs" />
+    <Compile Include="Step6\FallingPieceRotationLimitations.cs" />
+    <Compile Include="Step6\NinjaWallKick.cs" />
+    <Compile Include="Step6\RotatingFallingPieces.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -60,6 +60,7 @@
     <Compile Include="Step4\2WhenAPieceReachesTheBottom.cs" />
     <Compile Include="Step4\3WhenAPieceLandsOnAnotherPiece.cs" />
     <Compile Include="Step5\MovingAFallingPiece.cs" />
+    <Compile Include="Step5\MovingPieceIntoAnotherPiece.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

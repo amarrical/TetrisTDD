@@ -16,11 +16,7 @@ namespace TetrisTDD.Test.Step5
     [TestFixture]
     public class MovingAFallingPiece
     {
-        #region [ Fields ]
-
         private Board board = new Board(6, 8);
-
-        #endregion
 
         [SetUp]
         public void DropAPiece()
@@ -190,9 +186,7 @@ namespace TetrisTDD.Test.Step5
                 this.board.ToString());
         }
 
-        // TODO: it can not be moved left if another piece is in the way
-        // TODO: it can not be moved right if another piece is in the way
-        // TODO: it can not be moved down if another piece is in the way (will stop falling)
+       
         #endregion
     }
 }

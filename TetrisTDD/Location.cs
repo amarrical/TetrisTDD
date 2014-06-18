@@ -6,10 +6,30 @@
 //-----------------------------------------------------------------------
 namespace TetrisTDD
 {
+    /// <summary>
+    /// Represents a location 
+    /// </summary>
     public class Location
     {
+        /// <summary>
+        /// Gets or sets the X coordinate of this location
+        /// </summary>
         public int X { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Y coordinate of this location
+        /// </summary>
         public int Y { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Location"/> class
+        /// </summary>
+        /// <param name="x">The x coordinate of the new location</param>
+        /// <param name="y">The y coordinate of the new location</param>
+        public Location(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
     }
 }

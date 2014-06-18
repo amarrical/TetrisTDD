@@ -58,7 +58,6 @@ namespace TetrisTDD.Test.Step4
         [Test]
         public void ItStopsWhenItHitsTheOtherPiece()
         {
-
             this.board.Tick();
             Assert.AreEqual(
                    "........\n" +

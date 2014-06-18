@@ -32,30 +32,9 @@ namespace TetrisTDD
         /// </summary>
         public char BlockChar { get; private set; }
 
-        public Block[] adjacentBlocks { get; set; }
-
         #endregion
 
         #region [ Methods ]
-
-        public Block[] getAllConnectedBlocks()
-        {
-            Block[] array = this.adjacentBlocks;
-            
-            foreach(Block block in array)
-            {
-                Block[] tempArray = block.getAllConnectedBlocks();
-                foreach (Block tempBlock in tempArray)
-                {
-                    if (!array.Contains(tempBlock))
-                    {
-                        Block[] b = new Block[1]{tempBlock};
-                        b.CopyTo(array, array.Length);
-                    }
-                }
-            }
-            return array;
-        }
 
         /// <summary>
         /// Returns true if this is an empty block
@@ -66,6 +45,9 @@ namespace TetrisTDD
             return this.BlockChar == '.';
         }
 
+        /// <summary>
+        /// Assigns an empty value to this Block
+        /// </summary>
         public void SetEmpty()
         {
             this.BlockChar = '.';

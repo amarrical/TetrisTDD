@@ -11,6 +11,22 @@ namespace TetrisTDD
     /// </summary>
     public class Grid
     {
+        #region [ Constructor ]
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Grid"/> class
+        /// </summary>
+        /// <param name="height">the height of this grid</param>
+        /// <param name="width">the width of this grid</param>
+        public Grid(int height, int width)
+        {
+            this.Height = height;
+            this.Width = width;
+            this.BlockArray = new Block[height, width];
+        }
+
+        #endregion
+
         #region [ Fields ]
 
         /// <summary>
@@ -27,22 +43,6 @@ namespace TetrisTDD
         /// Gets A 2D array of blocks that represent this grid
         /// </summary>
         public Block[,] BlockArray { get; private set; }
-
-        #endregion
-
-        #region [ Constructor ]
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Grid"/> class
-        /// </summary>
-        /// <param name="height">the height of this grid</param>
-        /// <param name="width">the width of this grid</param>
-        public Grid(int height, int width)
-        {
-            this.Height = height;
-            this.Width = width;
-            this.BlockArray = new Block[height, width];
-        }
 
         #endregion
 
@@ -85,12 +85,6 @@ namespace TetrisTDD
                         {
                             return true;
                         }
-
-                        //if (!pieceArray[i, j].IsEmpty() 
-                        //    && !this.BlockArray[row + i, column + j].IsEmpty())
-                        //{
-                        //    return true;
-                        //}
                     }
                 }
             }

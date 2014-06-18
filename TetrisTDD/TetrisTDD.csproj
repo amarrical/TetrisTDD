@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Block.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="Enums\MoveDirection.cs" />
     <Compile Include="Enums\Orientation.cs" />
     <Compile Include="Enums\RotationDirection.cs" />
     <Compile Include="Enums\TetrominoShape.cs" />

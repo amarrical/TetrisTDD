@@ -58,9 +58,14 @@ namespace TetrisTDD
         /// </summary>
         private Orientation currentOrientation;
 
-        public int X { get; set; }
+        /// <summary>
+        /// The current location of this <c>Tetromino</c>
+        /// </summary>
+        public Location location { get; private set; }
 
-        public int Y { get; set; }
+        //public int X { get; set; }
+
+        //public int Y { get; set; }
 
         #endregion
 
@@ -90,6 +95,16 @@ namespace TetrisTDD
         #endregion
 
         #region [ Methods ]
+
+        public void SetLocation(int x, int y)
+        {
+            this.location = new Location(x, y);
+        }
+
+        public void SetLocation(Location newLocation)
+        {
+            this.location = newLocation;
+        }
 
         /// <summary>
         /// Gets a string representation of this <c>Tetromino</c>

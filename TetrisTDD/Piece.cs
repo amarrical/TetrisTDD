@@ -13,20 +13,6 @@ namespace TetrisTDD
     /// </summary>
     public class Piece
     {
-        #region [ Fields ]
-
-        /// <summary>
-        /// Gets the 2D array of Blocks that represents this piece
-        /// </summary>
-        public Block[,] PieceArray { get; private set; }
-
-        /// <summary>
-        /// Gets the height and width of this piece
-        /// </summary>
-        public int SideLength { get; private set; }
-
-        #endregion
-
         #region [ Constructor ]
 
         /// <summary>
@@ -59,6 +45,20 @@ namespace TetrisTDD
             }
         }
         
+        #endregion
+
+        #region [ Fields ]
+
+        /// <summary>
+        /// Gets the 2D array of Blocks that represents this piece
+        /// </summary>
+        public Block[,] PieceArray { get; private set; }
+
+        /// <summary>
+        /// Gets the height and width of this piece
+        /// </summary>
+        public int SideLength { get; private set; }
+
         #endregion
 
         #region [ Methods ]

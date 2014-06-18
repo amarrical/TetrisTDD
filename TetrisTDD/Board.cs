@@ -17,7 +17,7 @@ namespace TetrisTDD
         /// <summary>
         /// Represents the current <c>Tetromino</c> that is falling
         /// </summary>
-        public Tetromino FallingTetromino;
+        private Tetromino fallingTetromino;
 
         /// <summary>
         /// Height of the current game board
@@ -63,16 +63,17 @@ namespace TetrisTDD
         /// <summary>
         /// Moves the current falling <c>Tetromino</c> according to the MoveDirection
         /// </summary>
+        /// <param name="direction">The direction to move the falling <c>Tetromino</c></param>
         /// <returns>True on success, false otherwise</returns>
         public bool MovePiece(MoveDirection direction)
         {
-            if (this.FallingTetromino == null || !this.hasFalling || direction == null)
+            if (this.fallingTetromino == null || !this.hasFalling)
             {
                 return false;
             }
 
-            this.Remove(this.FallingTetromino);
-            Location originalLoc = this.FallingTetromino.location;
+            this.Remove(this.fallingTetromino);
+            Location originalLoc = this.fallingTetromino.Location;
             Location newLoc = originalLoc;
             if (direction == MoveDirection.Left)
             {
@@ -87,7 +88,12 @@ namespace TetrisTDD
                 newLoc = new Location(originalLoc.X, originalLoc.Y + 1);
             }
 
-            this.hasFalling = this.Place(this.FallingTetromino, newLoc);
+            this.hasFalling = this.Place(this.fallingTetromino, newLoc);
+            
+            if (!this.hasFalling)
+            {
+                this.Place(this.fallingTetromino, originalLoc);
+            }
 
             return this.hasFalling;
         }
@@ -144,13 +150,13 @@ namespace TetrisTDD
         /// </summary>
         public void Tick()
         {
-            if (this.hasFalling && this.FallingTetromino != null)
+            if (this.hasFalling && this.fallingTetromino != null)
             {
                 this.hasFalling = this.MovePiece(MoveDirection.Down);
 
                 if (!this.hasFalling)
                 {
-                    this.FallingTetromino = null;
+                    this.fallingTetromino = null;
                 }
             }
         }
@@ -202,25 +208,25 @@ namespace TetrisTDD
         /// </summary>
         /// <param name="row">The row of the board to start from</param>
         /// <param name="column">The column of the board to start from</param>
-        /// <param name="gHeight">The height of the grid, the number of rows to copy</param>
-        /// <param name="gWidth">The width of the grid, the number of columns to copy</param>
+        /// <param name="gridHeight">The height of the grid, the number of rows to copy</param>
+        /// <param name="gridWidth">The width of the grid, the number of columns to copy</param>
         /// <returns>A Grid for a section of the board</returns>
-        private Grid GetSubGrid(int row, int column, int gHeight, int gWidth)
+        private Grid GetSubGrid(int row, int column, int gridHeight, int gridWidth)
         {
-            if (row + gHeight > this.height)
+            if (row + gridHeight > this.height)
             {
-                gHeight = this.height - row;
+                gridHeight = this.height - row;
             }
 
-            if (column + gWidth > this.width)
+            if (column + gridWidth > this.width)
             {
-                gWidth = this.width - column;
+                gridWidth = this.width - column;
             }
 
-            Grid grid = new Grid(gHeight, gWidth);
-            for (int i = 0; i < gHeight; i++)
+            Grid grid = new Grid(gridHeight, gridWidth);
+            for (int i = 0; i < gridHeight; i++)
             {
-                for (int j = 0; j < gWidth; j++)
+                for (int j = 0; j < gridWidth; j++)
                 {
                     grid.BlockArray[i, j] = this.blockArray[row + i, column + j];
                 }
@@ -242,7 +248,7 @@ namespace TetrisTDD
 
             if (grid != null && !grid.HasConflict(tetromino, 0, 0))
             {
-                this.FallingTetromino = tetromino;
+                this.fallingTetromino = tetromino;
                 tetromino.SetLocation(location);
                 Piece tetPiece = new Piece(tetromino.ToString());
 
@@ -276,7 +282,7 @@ namespace TetrisTDD
                 {
                     if (!piece.PieceArray[row, col].IsEmpty())
                     {
-                        this.blockArray[row + tetromino.location.Y, col + tetromino.location.X].SetEmpty();
+                        this.blockArray[row + tetromino.Location.Y, col + tetromino.Location.X].SetEmpty();
                     }
                 }
             }

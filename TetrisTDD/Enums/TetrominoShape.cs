@@ -11,8 +11,19 @@ namespace TetrisTDD
     /// </summary>
     public enum TetrominoShape
     {
+        /// <summary>
+        /// T-shaped <c>Tetromino</c>
+        /// </summary>
         T_SHAPE,
+        
+        /// <summary>
+        /// I-shaped <c>Tetromino</c>
+        /// </summary>
         I_SHAPE,
+        
+        /// <summary>
+        /// O-shaped <c>Tetromino</c>
+        /// </summary>
         O_SHAPE
     }
 }

@@ -11,15 +11,7 @@ namespace TetrisTDD
     /// </summary>
     public class Location
     {
-        /// <summary>
-        /// Gets or sets the X coordinate of this location
-        /// </summary>
-        public int X { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Y coordinate of this location
-        /// </summary>
-        public int Y { get; set; }
+        #region [ Constructor ]
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Location"/> class
@@ -31,5 +23,21 @@ namespace TetrisTDD
             this.X = x;
             this.Y = y;
         }
+
+        #endregion
+
+        #region [ Fields ]
+
+        /// <summary>
+        /// Gets or sets the X coordinate of this location
+        /// </summary>
+        public int X { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Y coordinate of this location
+        /// </summary>
+        public int Y { get; set; }        
+
+        #endregion
     }
 }

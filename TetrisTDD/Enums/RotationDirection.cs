@@ -11,7 +11,14 @@ namespace TetrisTDD
     /// </summary>
     public enum RotationDirection
     {
+        /// <summary>
+        /// Clockwise rotation
+        /// </summary>
         Right,
+
+        /// <summary>
+        /// Counterclockwise rotation
+        /// </summary>
         Left
     }
 }

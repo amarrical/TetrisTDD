@@ -18,7 +18,7 @@ namespace TetrisTDD.Test.Step5
     {
         #region [ Fields ]
 
-        protected Board board = new Board(6, 8);
+        private Board board = new Board(6, 8);
 
         #endregion
 
@@ -61,7 +61,7 @@ namespace TetrisTDD.Test.Step5
                 "........\n" +
                 "........\n",
                 this.board.ToString());
-            Assert.IsTrue(board.HasFalling());
+            Assert.IsTrue(this.board.HasFalling());
         }
         
         [Test]
@@ -86,7 +86,7 @@ namespace TetrisTDD.Test.Step5
                 "........\n" +
                 "........\n",
                 this.board.ToString());
-            Assert.IsTrue(board.HasFalling());
+            Assert.IsTrue(this.board.HasFalling());
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace TetrisTDD.Test.Step5
                 "...TTT..\n" +
                 "........\n",
                 this.board.ToString());
-            Assert.IsTrue(board.HasFalling());
+            Assert.IsTrue(this.board.HasFalling());
         }
 
         // TODO: it will not move left over over the board
@@ -120,8 +120,6 @@ namespace TetrisTDD.Test.Step5
         // TODO: it can not be moved left if another piece is in the way
         // TODO: it can not be moved right if another piece is in the way
         // TODO: it can not be moved down if another piece is in the way (will stop falling)
-
         #endregion
-
     }
 }

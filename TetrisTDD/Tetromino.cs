@@ -59,13 +59,9 @@ namespace TetrisTDD
         private Orientation currentOrientation;
 
         /// <summary>
-        /// The current location of this <c>Tetromino</c>
+        /// Gets the current location of this <c>Tetromino</c>
         /// </summary>
-        public Location location { get; private set; }
-
-        //public int X { get; set; }
-
-        //public int Y { get; set; }
+        public Location Location { get; private set; }
 
         #endregion
 
@@ -96,14 +92,23 @@ namespace TetrisTDD
 
         #region [ Methods ]
 
+        /// <summary>
+        /// Sets the location for this <c>Tetromino</c>
+        /// </summary>
+        /// <param name="x">The x coordinate</param>
+        /// <param name="y">The y coordinate</param>
         public void SetLocation(int x, int y)
         {
-            this.location = new Location(x, y);
+            this.Location = new Location(x, y);
         }
 
+        /// <summary>
+        /// Sets the location for this <c>Tetromino</c>
+        /// </summary>
+        /// <param name="newLocation">The new location to be used</param>
         public void SetLocation(Location newLocation)
         {
-            this.location = newLocation;
+            this.Location = newLocation;
         }
 
         /// <summary>

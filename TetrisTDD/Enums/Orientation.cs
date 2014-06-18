@@ -11,9 +11,24 @@ namespace TetrisTDD
     /// </summary>
     public enum Orientation
     {
+        /// <summary>
+        /// Initial orientation
+        /// </summary>
         A,
+
+        /// <summary>
+        /// Orientation after 90 degree rotation
+        /// </summary>
         B,
+
+        /// <summary>
+        /// Orientation after 180 degree rotation
+        /// </summary>
         C,
+
+        /// <summary>
+        /// Orientation after 270 degree rotation
+        /// </summary>
         D
     }
 }

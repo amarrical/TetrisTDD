@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step5
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -38,8 +41,7 @@ namespace TetrisTDD.Test.Step5
         [Test]
         public void FallingPieceCanBeMovedLeft()
         {
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
+            this.board.MovePiece(Direction.Left, Direction.Left);
             Assert.AreEqual(
                 "..T.....\n" +
                 ".TTT....\n" +
@@ -63,8 +65,7 @@ namespace TetrisTDD.Test.Step5
         [Test]
         public void FallingPieceCanBeMovedRight()
         {
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(Direction.Right, Direction.Right);
             Assert.AreEqual(
                 "......T.\n" +
                 ".....TTT\n" +
@@ -88,8 +89,7 @@ namespace TetrisTDD.Test.Step5
         [Test]
         public void FallingPieceCanBeMovedDown()
         {
-            this.board.MovePiece(MoveDirection.Down);
-            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(Direction.Down, Direction.Down);
             Assert.AreEqual(
                 "........\n" +
                 "........\n" +
@@ -113,9 +113,7 @@ namespace TetrisTDD.Test.Step5
         [Test]
         public void CanNotMoveLeftPastBorder()
         {
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
+            this.board.MovePiece(Direction.Left, Direction.Left, Direction.Left);
             Assert.AreEqual(
                 ".T......\n" +
                 "TTT.....\n" +
@@ -124,7 +122,7 @@ namespace TetrisTDD.Test.Step5
                 "........\n" +
                 "........\n",
                 this.board.ToString());
-            this.board.MovePiece(MoveDirection.Left);
+            this.board.MovePiece(Direction.Left);
             Assert.AreEqual(
                 ".T......\n" +
                 "TTT.....\n" +
@@ -138,9 +136,7 @@ namespace TetrisTDD.Test.Step5
         [Test]
         public void CanNotMoveRightPastBorder()
         {
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(Direction.Right, Direction.Right, Direction.Right);
             Assert.AreEqual(
                 "......T.\n" +
                 ".....TTT\n" +
@@ -149,7 +145,7 @@ namespace TetrisTDD.Test.Step5
                 "........\n" +
                 "........\n",
                 this.board.ToString());
-            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(Direction.Right);
             Assert.AreEqual(
                 "......T.\n" +
                 ".....TTT\n" +
@@ -163,10 +159,7 @@ namespace TetrisTDD.Test.Step5
         [Test]
         public void CanNotMoveDownPastBorder()
         {
-            this.board.MovePiece(MoveDirection.Down);
-            this.board.MovePiece(MoveDirection.Down);
-            this.board.MovePiece(MoveDirection.Down);
-            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(Direction.Down, Direction.Down, Direction.Down, Direction.Down);
             Assert.AreEqual(
                 "........\n" +
                 "........\n" +
@@ -175,7 +168,7 @@ namespace TetrisTDD.Test.Step5
                 "....T...\n" +
                 "...TTT..\n",
                 this.board.ToString());
-            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(Direction.Down);
             Assert.AreEqual(
                 "........\n" +
                 "........\n" +

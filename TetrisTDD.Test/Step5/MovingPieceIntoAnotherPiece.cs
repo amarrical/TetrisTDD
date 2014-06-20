@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step5
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -23,25 +26,13 @@ namespace TetrisTDD.Test.Step5
         {
             this.board.ClearBoard();
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
-
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.MovePiece(Direction.Left, Direction.Left, Direction.Left);
+            this.board.Ticks(5);
 
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(Direction.Right, Direction.Right);
 
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.Ticks(5);
 
             Assert.AreEqual(
                 "........\n" +
@@ -59,10 +50,8 @@ namespace TetrisTDD.Test.Step5
         public void CanNotBeMovedLeftIntoAnotherPiece()
         {
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.MovePiece(Direction.Left);
+            this.board.Ticks(3);
 
             Assert.AreEqual(
                  "........\n" +
@@ -73,7 +62,7 @@ namespace TetrisTDD.Test.Step5
                  "TTT..TTT\n",
                  this.board.ToString());
 
-            this.board.MovePiece(MoveDirection.Left);
+            this.board.MovePiece(Direction.Left);
             Assert.AreEqual(
                  "........\n" +
                  "........\n" +
@@ -88,9 +77,7 @@ namespace TetrisTDD.Test.Step5
         public void CanNotBeMovedRightIntoAnotherPiece()
         {
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.Ticks(3);
 
             Assert.AreEqual(
                  "........\n" +
@@ -101,7 +88,7 @@ namespace TetrisTDD.Test.Step5
                  "TTT..TTT\n",
                  this.board.ToString());
 
-            this.board.MovePiece(MoveDirection.Right);
+            this.board.MovePiece(Direction.Right);
             Assert.AreEqual(
                  "........\n" +
                  "........\n" +
@@ -116,9 +103,7 @@ namespace TetrisTDD.Test.Step5
         public void CanNotBeMovedDownIntoAnotherPiece()
         {
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.Ticks(3);
 
             Assert.AreEqual(
                  "........\n" +
@@ -129,7 +114,7 @@ namespace TetrisTDD.Test.Step5
                  "TTT..TTT\n",
                  this.board.ToString());
 
-            this.board.MovePiece(MoveDirection.Down);
+            this.board.MovePiece(Direction.Down);
             Assert.AreEqual(
                  "........\n" +
                  "........\n" +

@@ -4,8 +4,15 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
+    using TetrisTDD.Enums;
+    using TetrisTDD.Interfaces;
+    using TetrisTDD.PieceModifiers;
+
     /// <summary>
     /// This is the board.  Treat it well.
     /// Note that StyleCop counts here, but tests don't care.
@@ -39,6 +46,11 @@ namespace TetrisTDD
         /// </summary>
         private bool hasFalling;
 
+        /// <summary>
+        /// Handles the lateral movement of this <c>Tetromino</c>
+        /// </summary>
+        private IPieceModifier pieceMover;
+
         #endregion
 
         #region [ Constructor ]
@@ -54,6 +66,7 @@ namespace TetrisTDD
             this.width = width;
             this.blockArray = new Block[height, width];
             this.ClearBoard();
+            this.pieceMover = new MovePieceModifier();
         }
 
         #endregion
@@ -61,85 +74,91 @@ namespace TetrisTDD
         #region [ Methods ]
 
         /// <summary>
-        /// Rotates the currently falling piece according to the specified direction
+        /// Rotates the current falling <c>Tetromino</c> multiple times
         /// </summary>
-        /// <param name="direction">The direction to rotate the falling piece</param>
-        /// <returns>True on success, false otherwise</returns>
-        public bool Rotate(RotationDirection direction)
+        /// <param name="rotations">The rotations to evaluate</param>
+        /// <returns>True if all rotations successful, false otherwise</returns>
+        public bool Rotations(params Rotation[] rotations)
         {
-            if (this.fallingTetromino == null || !this.hasFalling)
+            bool success = true;
+            foreach (var rotation in rotations)
             {
-                return false;
-            }
-
-            Tetromino rotatedTet = this.fallingTetromino.Rotate(direction);
-            Location originalLocation = this.fallingTetromino.Location;
-            Location locToLeft = new Location(originalLocation.X - 1, originalLocation.Y);
-            Location locToRight = new Location(originalLocation.X + 1, originalLocation.Y);
-
-            this.Remove(this.fallingTetromino);
-
-            bool success = false;
-
-            if (!success)
-            {   // Try placing the rotated piece in the same location
-                success = this.Place(rotatedTet, originalLocation);
-                rotatedTet.SetLocation(originalLocation);
-            }
-
-            if (!success)
-            {   // Try placing the rotated piece one block to the left
-                success = this.Place(rotatedTet, locToLeft);
-                rotatedTet.SetLocation(locToLeft);
-            }
-
-            if (!success)
-            {   // Try placing the rotated piece one block to the right
-                success = this.Place(rotatedTet, locToRight);
-                rotatedTet.SetLocation(locToRight);
-            }
-
-            if (success)
-            {   // Use the rotated Tetromino if it was placed successfully
-                this.fallingTetromino = rotatedTet;
-            }
-            else
-            {   // If all else fails, put the piece back in its original spot
-                this.Place(this.fallingTetromino, originalLocation);
+                success = success && this.Rotate(rotation);
             }
 
             return success;
         }
 
         /// <summary>
-        /// Moves the current falling <c>Tetromino</c> according to the MoveDirection
+        /// Rotates the currently falling piece according to the specified direction
         /// </summary>
-        /// <param name="direction">The direction to move the falling <c>Tetromino</c></param>
+        /// <param name="rotation">The direction to rotate the falling piece</param>
         /// <returns>True on success, false otherwise</returns>
-        public bool MovePiece(MoveDirection direction)
+        public bool Rotate(Rotation rotation)
         {
             if (this.fallingTetromino == null || !this.hasFalling)
             {
                 return false;
             }
 
-            Location originalLoc = this.fallingTetromino.Location;
-            Location newLoc = originalLoc;
+            Tetromino rotatedTet = this.fallingTetromino.Rotate(rotation);
+            Location tetLocation = this.fallingTetromino.Location;
+
             this.Remove(this.fallingTetromino);
 
-            if (direction == MoveDirection.Left)
+            IList<Direction> directions = new List<Direction>();
+            directions.Add(Direction.None);
+            directions.Add(Direction.Left);
+            directions.Add(Direction.Right);
+            IList<Location> possibleLocations = this.pieceMover.ParseDirections(directions, tetLocation);
+            
+            foreach (var location in possibleLocations)
             {
-                newLoc = new Location(originalLoc.X - 1, originalLoc.Y);
-            }
-            else if (direction == MoveDirection.Right)
-            {
-                newLoc = new Location(originalLoc.X + 1, originalLoc.Y);
-            }
-            else if (direction == MoveDirection.Down)
-            {
-                newLoc = new Location(originalLoc.X, originalLoc.Y + 1);
+                if (this.Place(rotatedTet, location))
+                {
+                    rotatedTet.SetLocation(location);
+                    this.fallingTetromino = rotatedTet;
+                    return true;
+                }
             }
 
+            // If all else fails, put the piece back in its original spot
+            this.Place(this.fallingTetromino, tetLocation);
+            return false;
+        }
+
+        /// <summary>
+        /// Moves the current falling <c>Tetromino</c> according to the directions 
+        /// </summary>
+        /// <param name="directions">The directions to move the falling <c>Tetromino</c></param>
+        /// <returns>True if all movements are successful, false otherwise</returns>
+        public bool MovePiece(params Direction[] directions)
+        {
+            bool success = true;
+            foreach (var direction in directions)
+            {
+                success = success && this.MovePiece(direction);
+            }
+
+            return success;
+        }
+
+        /// <summary>
+        /// Moves the current falling <c>Tetromino</c> according to the Direction
+        /// </summary>
+        /// <param name="direction">The direction to move the falling <c>Tetromino</c></param>
+        /// <returns>True on success, false otherwise</returns>
+        public bool MovePiece(Direction direction)
+        {
+            if (this.fallingTetromino == null || !this.hasFalling)
+            {
+                return false;
+            }
+
+            var originalLoc = this.fallingTetromino.Location;
+            var newLoc = this.pieceMover.ParseDirection(direction, originalLoc);
+
+            this.Remove(this.fallingTetromino);
             this.hasFalling = this.Place(this.fallingTetromino, newLoc);
             
             if (!this.hasFalling)
@@ -217,7 +236,7 @@ namespace TetrisTDD
         {
             if (this.hasFalling && this.fallingTetromino != null)
             {
-                this.hasFalling = this.MovePiece(MoveDirection.Down);
+                this.hasFalling = this.MovePiece(Direction.Down);
 
                 if (!this.hasFalling)
                 {

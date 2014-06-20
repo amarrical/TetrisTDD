@@ -4,7 +4,7 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Enums
 {
     /// <summary>
     /// Represents the current orientation of a <c>Tetromino</c>

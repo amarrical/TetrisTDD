@@ -4,7 +4,7 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Enums
 {
     /// <summary>
     /// Represents the type of shapes a <c>Tetromino</c> can represent<c>Tetromino</c>

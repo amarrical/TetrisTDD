@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step4
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -20,10 +23,7 @@ namespace TetrisTDD.Test.Step4
         public void FallToLastRow()
         {
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.Ticks(4);
         }
 
         [Test]

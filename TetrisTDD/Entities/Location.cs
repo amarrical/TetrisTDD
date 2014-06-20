@@ -4,10 +4,10 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Entities
 {
     /// <summary>
-    /// Represents a location 
+    /// Represents a location by an object's top left corner
     /// </summary>
     public class Location
     {

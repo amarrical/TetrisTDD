@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step3
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -39,7 +42,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedRightOnce()
         {
-            this.shape = this.shape.Rotate(RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise);
             Assert.AreEqual(
                     "..I..\n" +
                     "..I..\n" +
@@ -52,7 +55,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedLeftOnce()
         {
-            this.shape = this.shape.Rotate(RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise);
             Assert.AreEqual(
                     "..I..\n" +
                     "..I..\n" +
@@ -66,9 +69,9 @@ namespace TetrisTDD.Test.Step3
         public void RotatingItTwiceWillGoBackToTheOriginalShape()
         {
             string original = this.shape.ToString();
-            this.shape = this.shape.Rotate(RotationDirection.Right, RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise, Rotation.Clockwise);
             Assert.AreEqual(original, this.shape.ToString());
-            this.shape = this.shape.Rotate(RotationDirection.Left, RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise, Rotation.Counterclockwise);
             Assert.AreEqual(original, this.shape.ToString());
         }
         #endregion

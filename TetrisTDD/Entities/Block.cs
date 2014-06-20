@@ -4,7 +4,7 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Entities
 {
     using System.Linq;
 

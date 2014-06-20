@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step4
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -21,11 +24,7 @@ namespace TetrisTDD.Test.Step4
         {
             this.board.ClearBoard();
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
-            this.board.Tick();
+            this.board.Ticks(5);
             Assert.AreEqual(
                    "........\n" +
                    "........\n" +
@@ -37,8 +36,7 @@ namespace TetrisTDD.Test.Step4
             Assert.IsFalse(this.board.HasFalling());
 
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.Tick();
-            this.board.Tick();
+            this.board.Ticks(2);
         }
 
         [Test]

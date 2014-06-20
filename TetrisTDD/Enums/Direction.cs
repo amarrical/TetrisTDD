@@ -1,15 +1,15 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MoveDirection.cs" company="ImprovingEnterprises">
+// <copyright file="Direction.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Enums
 {
     /// <summary>
     /// The possible movement directions for <c>Tetrominoes</c>
     /// </summary>
-    public enum MoveDirection
+    public enum Direction
     {
         /// <summary>
         /// Left <c>Tetromino</c> movement
@@ -24,6 +24,11 @@ namespace TetrisTDD
         /// <summary>
         /// Downwards <c>Tetromino</c> movement
         /// </summary>
-        Down
+        Down,
+
+        /// <summary>
+        /// No <c>Tetromino</c> movement
+        /// </summary>
+        None
     }
 }

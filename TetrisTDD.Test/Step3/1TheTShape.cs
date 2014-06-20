@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step3
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -37,19 +40,19 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedRight3Times()
         {
-            this.shape = this.shape.Rotate(RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise);
             Assert.AreEqual(
                     ".T.\n" +
                     ".TT\n" +
                     ".T.\n",
                     shape.ToString());
-            this.shape = this.shape.Rotate(RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise);
             Assert.AreEqual(
                     "...\n" +
                     "TTT\n" +
                     ".T.\n",
                     this.shape.ToString());
-            this.shape = this.shape.Rotate(RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise);
             Assert.AreEqual(
                     ".T.\n" +
                     "TT.\n" +
@@ -60,19 +63,19 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanBeRotatedLeft3Times()
         {
-            this.shape = this.shape.Rotate(RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise);
             Assert.AreEqual(
                     ".T.\n" +
                     "TT.\n" +
                     ".T.\n",
                     this.shape.ToString());
-            this.shape = this.shape.Rotate(RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise);
             Assert.AreEqual(
                     "...\n" +
                     "TTT\n" +
                     ".T.\n",
                     this.shape.ToString());
-            this.shape = this.shape.Rotate(RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise);
             Assert.AreEqual(
                     ".T.\n" +
                     ".TT\n" +
@@ -84,9 +87,9 @@ namespace TetrisTDD.Test.Step3
         public void RotatingIt4TimesWillGoBackToTheOriginalShape()
         {
             string original = this.shape.ToString();
-            this.shape = this.shape.Rotate(RotationDirection.Right, RotationDirection.Right, RotationDirection.Right, RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise, Rotation.Clockwise, Rotation.Clockwise, Rotation.Clockwise);
             Assert.AreEqual(original, shape.ToString());
-            this.shape = this.shape.Rotate(RotationDirection.Left, RotationDirection.Left, RotationDirection.Left, RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise, Rotation.Counterclockwise, Rotation.Counterclockwise, Rotation.Counterclockwise);
             Assert.AreEqual(original, this.shape.ToString());
         }
 

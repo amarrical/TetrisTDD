@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step3
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -37,7 +40,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanNotBeRotatedRight()
         {
-            this.shape = this.shape.Rotate(RotationDirection.Right);
+            this.shape = this.shape.Rotate(Rotation.Clockwise);
             Assert.AreEqual(
                     ".OO\n" +
                     ".OO\n" +
@@ -48,7 +51,7 @@ namespace TetrisTDD.Test.Step3
         [Test]
         public void CanNotBeRotatedLeft()
         {
-            this.shape = this.shape.Rotate(RotationDirection.Left);
+            this.shape = this.shape.Rotate(Rotation.Counterclockwise);
             Assert.AreEqual(
                     ".OO\n" +
                     ".OO\n" +

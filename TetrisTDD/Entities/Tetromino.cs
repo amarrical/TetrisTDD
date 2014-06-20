@@ -4,15 +4,17 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Entities
 {
+    using TetrisTDD.Enums;
+
     /// <summary>
     /// Represents one of many possible Tetris game pieces
     /// </summary>
     public class Tetromino
     {
         #region [ Fields ]
-        
+
         /// <summary>
         /// The string representation of a T_SHAPE <c>Tetromino</c> at its initial orientation
         /// </summary>
@@ -58,11 +60,6 @@ namespace TetrisTDD
         /// </summary>
         private Orientation currentOrientation;
 
-        /// <summary>
-        /// Gets the current location of this <c>Tetromino</c>
-        /// </summary>
-        public Location Location { get; private set; }
-
         #endregion
 
         #region [ Constructors ]
@@ -87,6 +84,15 @@ namespace TetrisTDD
             this.currentShape = shape;
             this.currentOrientation = orientation;
         }
+
+        #endregion
+
+        #region [ Properties ]
+
+        /// <summary>
+        /// Gets the current location of this <c>Tetromino</c>
+        /// </summary>
+        public Location Location { get; private set; }
 
         #endregion
 
@@ -125,17 +131,17 @@ namespace TetrisTDD
         /// </summary>
         /// <param name="rotations">The rotations to apply to this <c>Tetromino</c></param>
         /// <returns>A new <c>Tetromino</c> with the specified rotations</returns>
-        public Tetromino Rotate(params RotationDirection[] rotations)
+        public Tetromino Rotate(params Rotation[] rotations)
         {
             Orientation newOrientation = this.currentOrientation;
 
-            foreach (RotationDirection rotation in rotations)
+            foreach (Rotation rotation in rotations)
             {
-                if (rotation == RotationDirection.Right)
+                if (rotation == Rotation.Clockwise)
                 {
                     newOrientation = (Orientation)(((int)newOrientation + 1) % 4);
                 }
-                else if (rotation == RotationDirection.Left)
+                else if (rotation == Rotation.Counterclockwise)
                 {
                     newOrientation = (Orientation)(((int)newOrientation + 3) % 4);
                 }

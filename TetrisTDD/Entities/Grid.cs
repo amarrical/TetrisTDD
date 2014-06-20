@@ -4,7 +4,7 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Entities
 {
     /// <summary>
     /// Represents a grid of Blocks

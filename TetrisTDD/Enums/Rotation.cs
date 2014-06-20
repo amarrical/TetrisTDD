@@ -1,24 +1,24 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="RotationDirection.cs" company="ImprovingEnterprises">
+// <copyright file="Rotation.cs" company="ImprovingEnterprises">
 //     Copyright (c) ImprovingEnterprises. All rights reserved.
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Enums
 {
     /// <summary>
-    /// The possible directions for rotation of this piece
+    /// The possible directions for rotation of a piece
     /// </summary>
-    public enum RotationDirection
+    public enum Rotation
     {
         /// <summary>
         /// Clockwise rotation
         /// </summary>
-        Right,
+        Clockwise,
 
         /// <summary>
         /// Counterclockwise rotation
         /// </summary>
-        Left
+        Counterclockwise
     }
 }

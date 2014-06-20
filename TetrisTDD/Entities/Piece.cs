@@ -4,9 +4,10 @@
 // </copyright>
 // <author>Patrick Sheehan</author>
 //-----------------------------------------------------------------------
-namespace TetrisTDD
+namespace TetrisTDD.Entities
 {
     using System;
+    using TetrisTDD.Enums;
  
     /// <summary>
     /// Used to represent a cluster of Blocks
@@ -67,13 +68,13 @@ namespace TetrisTDD
         /// Rotates this piece according to the provided direction
         /// </summary>
         /// <param name="direction">The direction to rotate the piece</param>
-        public void Rotate(RotationDirection direction)
+        public void Rotate(Rotation direction)
         {
-            if (direction == RotationDirection.Right)
+            if (direction == Rotation.Clockwise)
             {
                 this.PieceArray = RotateRight(this.PieceArray, this.SideLength);
             }
-            else if (direction == RotationDirection.Left)
+            else if (direction == Rotation.Counterclockwise)
             {
                 this.PieceArray = RotateLeft(this.PieceArray, this.SideLength);
             }

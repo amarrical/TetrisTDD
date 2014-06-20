@@ -10,6 +10,9 @@ namespace TetrisTDD.Test.Step6
 
     using NUnit.Framework;
 
+    using TetrisTDD.Entities;
+    using TetrisTDD.Enums;
+
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules",
         "SA1600:ElementsMustBeDocumented",
         Justification = "Tests are self documenting")]
@@ -22,11 +25,8 @@ namespace TetrisTDD.Test.Step6
         public void PlaceBlockByWall()
         {
             this.board.Drop(new Tetromino(TetrominoShape.T_SHAPE));
-            this.board.Rotate(RotationDirection.Right);
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
-            this.board.MovePiece(MoveDirection.Left);
+            this.board.Rotate(Rotation.Clockwise);
+            this.board.MovePiece(Direction.Left, Direction.Left, Direction.Left, Direction.Left);
             Assert.AreEqual(
                 "T.......\n" +
                 "TT......\n" +
@@ -40,7 +40,7 @@ namespace TetrisTDD.Test.Step6
         [Test]
         public void FallingPieceRotatedMovesAwayFromWall()
         {
-            this.board.Rotate(RotationDirection.Left);
+            this.board.Rotate(Rotation.Counterclockwise);
 
             Assert.AreEqual(
                     ".T......\n" +
@@ -51,13 +51,8 @@ namespace TetrisTDD.Test.Step6
                     "........\n",
                     this.board.ToString());
 
-            this.board.Rotate(RotationDirection.Left);
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
-            this.board.MovePiece(MoveDirection.Right);
+            this.board.Rotate(Rotation.Counterclockwise);
+            this.board.MovePiece(Direction.Right, Direction.Right, Direction.Right, Direction.Right, Direction.Right, Direction.Right);
 
             Assert.AreEqual(
                     ".......T\n" +
@@ -68,7 +63,7 @@ namespace TetrisTDD.Test.Step6
                     "........\n",
                     this.board.ToString());
 
-            this.board.Rotate(RotationDirection.Right);
+            this.board.Rotate(Rotation.Clockwise);
 
             Assert.AreEqual(
                     "......T.\n" +
